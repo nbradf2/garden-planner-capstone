@@ -1,0 +1,32 @@
+{
+  "name": "garden-planner-capstone",
+  "version": "1.0.0",
+  "description": "Thinkful Capstone Project - GardenPlanner",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbradf2/garden-planner-capstone.git"
+  },
+  "keywords": [
+    "Thinkful",
+    "NodeJS",
+    "Mocha",
+    "Chai",
+    "TravisCI",
+    "CRUD",
+    "REST",
+    "API"
+  ],
+  "author": "Nicole E. Bradford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbradf2/garden-planner-capstone/issues"
+  },
+  "homepage": "https://github.com/nbradf2/garden-planner-capstone#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
