@@ -1,0 +1,112 @@
+/*
+Colors:
+Text/Dark:  #202421;
+Background/Light: #FEFDFB;
+Red: #F04F48;
+Yellow: #FEC57C;
+Green: #0E8358;
+*/
+
+
+/***** CSS RESET *****/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    box-sizing: border-box;
+    /*  CHROME  */
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-before: 0px;
+    -webkit-padding-after: 0px;
+    -webkit-padding-start: 0px;
+    -webkit-padding-end: 0px;
+    /*  DELETE BEFORE SUBMITTING  */
+    /*    border: 1px solid grey*/
+}
+
+/***** GENERAL STYLES *****/
+
+body {
+	background-color: #FEFDFB;
+	color: #202421;
+	font-family: 'Barlow', sans-serif;
+	font-size: 18px;
+	text-align: center;
+}
+
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 2rem;
+	margin-top: 2rem;
+	text-align: center;
+}
+
+header, section {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+/***** FORM *****/
+form, label, input, button {
+	width: 100%;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+
+form {
+	border: 1px solid #F04F48;
+	border-radius: 5px;
+	margin-top: 2rem;
+	padding: 1rem;
+}
+
+form label {
+	text-align: left;
+}
+
+form input {
+	margin-top: 0.2rem;
+	margin-bottom: 1rem;
+	padding-left: 0.5rem;
+	height: 1.8rem;
+	font-family: 'Barlow', sans-serif;
+	font-size: 1rem;
+	border: 0.5px solid #FEC57C;
+	border-radius: 3px;
+}
+
+form button {
+	font-family: 'Barlow', sans-serif;
+	border: 0.5px solid #4FA485;
+	border-radius: 3px;
+	height: 1.8rem;
+	background-color: #4FA485;
+}
+
+/***** MEDIA QUERIES *****/
+
+@media only screen and (min-width: 600px) {
+
+}
+
+@media only screen and (min-width: 900px) {
+
+	form, label, input, button {
+		width: 80%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+
+	form {
+		width: 60%;
+	}
+
+}
