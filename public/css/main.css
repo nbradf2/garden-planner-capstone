@@ -33,6 +33,10 @@ Green: #0E8358;
 
 body {
 	background-color: #FEFDFB;
+	/*background-image: url("../images/vegetable-basket.jpg")
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;*/
 	color: #202421;
 	font-family: 'Barlow', sans-serif;
 	font-size: 18px;
