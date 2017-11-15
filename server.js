@@ -31,7 +31,7 @@ function runServer() {
 }
 
 function closeServer() {
-	return mongooose.disconnect().then(() => {
+	// return mongooose.disconnect().then(() => {
 		return new Promise((resolve, reject) => {
 			console.log('Closing server');
 			server.close(err => {
@@ -42,7 +42,7 @@ function closeServer() {
 				resolve();
 			});
 		});
-	});
+	// });
 }
 
 if (require.main === module) {
