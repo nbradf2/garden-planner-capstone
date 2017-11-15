@@ -16,19 +16,6 @@ app.get('/', (req, res) => {
 
 // app.use('/endpoint', router);
 
-function runServer() {
-	const port = process.env.PORT || 8080;
-	return new Promise((resolve, reject) => {
-		app.listen(port, () => {
-			console.log(`Your app is listening on port ${port}`);
-			resolve();
-		})
-		.on('error', err => {
-			reject(err);
-		});
-	});
-}
-
 let server;
 
 function runServer() {
@@ -44,14 +31,16 @@ function runServer() {
 }
 
 function closeServer() {
-	return new Promise((resolve, reject) => {
-		console.log('Closing server');
-		server.close(err => {
-			if (err) {
-				reject(err);
-				return;
-			}
-			resolve();
+	return mongooose.disconnect().then(() => {
+		return new Promise((resolve, reject) => {
+			console.log('Closing server');
+			server.close(err => {
+				if (err) {
+					reject(err);
+					return;
+				}
+				resolve();
+			});
 		});
 	});
 }

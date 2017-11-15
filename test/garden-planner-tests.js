@@ -16,12 +16,32 @@ describe('Garden Planner', function() {
 	after(function() {
 		return closeServer();
 	});
+
 	it('should return response 200 and html', function() {
 		return chai.request(app)
 			.get('/')
 			.then(function(res) {
 				res.should.have.status(200);
 				res.should.be.html;
-			})
+			});
+	})
+
+	it('should return response 200 and register.html', function() {
+		return chai.request(app)
+			.get('/register.html')
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.html;
+			});
+	})
+
+	it('should return response 200 and home.html', function() {
+		return chai.request(app)
+			.get('/home.html')
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.html;
+			});
 	})
 })
+
