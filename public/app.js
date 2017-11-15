@@ -37,3 +37,13 @@ var MOCK_GARDEN_LIST = {
 		}
 	]
 }
+
+// FUNCTION DEFINITIONS
+
+
+
+
+
+
+
+// FUNCTION USAGE
