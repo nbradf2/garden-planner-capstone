@@ -42,6 +42,7 @@ body {
 h1 {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 2rem;
+	color: #0E8358;
 	margin-top: 2rem;
 	text-align: center;
 }
@@ -49,6 +50,13 @@ h1 {
 header, section {
 	width: 80%;
 	margin: 0 auto;
+}
+
+/***** LINKS *****/
+
+a {
+	text-decoration: none;
+	color: #0E8358;
 }
 
 /***** LANDING PAGE *****/
@@ -83,10 +91,10 @@ form input {
 
 form button {
 	font-family: 'Barlow', sans-serif;
-	border: 0.5px solid #4FA485;
+	border: 0.5px solid #F04F48;
 	border-radius: 3px;
 	height: 1.8rem;
-	background-color: #4FA485;
+	background-color: #F04F48;
 }
 
 .register-links {
