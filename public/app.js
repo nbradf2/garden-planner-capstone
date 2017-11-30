@@ -1,5 +1,5 @@
-var MOCK_GARDEN_LIST = {
-	"list": [
+var MOCK_GARDEN_LIST = 
+ [
 		{
 			"id": "1111111",
 			"name": "Heirloom Tomato",
@@ -36,14 +36,6 @@ var MOCK_GARDEN_LIST = {
 			"comments": "Likes cooler weather"
 		}
 	]
-}
-
-// FUNCTION DEFINITIONS
 
 
 
-
-
-
-
-// FUNCTION USAGE

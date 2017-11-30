@@ -3,7 +3,7 @@
 }
 
 .row {
-    max-width: 1000px;
+    max-width: 1600px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 0 auto;
@@ -40,7 +40,8 @@
 .col-3,
 .col-4,
 .col-6,
-.col-8 .col-9,
+.col-8,
+.col-9,
 .col-12 {
     width: 100%;
 }
@@ -59,7 +60,7 @@
         width: 33%;
     }
     .col-6 {
-        width: 50%;
+        width: 49%;
     }
     .col-8 {
         width: 66%;

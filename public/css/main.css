@@ -113,6 +113,40 @@ form button {
 	display: block;
 }
 
+/***** HOME PAGE *****/
+
+.nav-bar {
+	border-bottom: 2px solid #F04F48;
+	padding-bottom: 0.5rem;
+}
+
+.nav-bar h1 {
+	font-size: 1.5rem;
+}
+
+/*.nav-bar p{
+	text-align: right;
+}*/
+
+.content {
+	margin-top: 2rem;
+	padding: 1rem;
+}
+
+#plant-list, #journal {
+	border: 1px solid #F04F48;
+/*	text-align: left;*/
+}
+
+#plant-list {
+	margin-right: 0.5rem;
+}
+
+#journal {
+	margin-left: 0.5rem;
+}
+
+
 /***** MEDIA QUERIES *****/
 
 @media only screen and (min-width: 600px) {
@@ -130,6 +164,11 @@ form button {
 
 	.forgot-password {
 		float: right;
+	}
+
+	.nav-bar h1 {
+		display: inline-block;
+		text-align: left;
 	}
 }
 
