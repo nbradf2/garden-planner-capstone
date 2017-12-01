@@ -1,15 +1,15 @@
 require('dotenv').config();
 //serve index.html file
-const bodyParser - require('body-parser');
+const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const passport = require('passport');
 
 // add const for router
 const {router: usersRouter} = require('./users');
 const {router: authRouter, basicStrategy, jwtStrategy} = require('./auth');
-
+const {router: gardenRouter} = require('./garden');
 // mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config');
@@ -38,15 +38,17 @@ passport.use(basicStrategy);
 // to register our JWT strategy with Passport, use the passport.use method:
 passport.use(jwtStrategy);
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
+app.use('/users/', usersRouter);
+app.use('/auth/', authRouter);
+app.use('/garden/', gardenRouter);
 
 // use this to protect the /api/auth/login endpoint defined 
 // in /auth/router.js
 
 // use this to JWT strategy to protect endpoints:
+// TEST ROUTE
 app.get(
-	'/api/protected',
+	'/protected',
 	// use passport.authenticate middleware to protect the endpoint, 
 	// passing JWT as the agument instead of the basic AUTH strategy:
 
@@ -101,6 +103,7 @@ let server;
 
 function runServer() {
 	return new Promise((resolve, reject) => {
+		console.log(DATABASE_URL);
 		mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
 			if (err) {
 				return reject(err);

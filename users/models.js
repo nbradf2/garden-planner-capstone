@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt.js');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -34,7 +34,7 @@ UserSchema.methods.validatePassword = function(password) {
 // Using the BCRYPTJS library to handle encrypting user passwords.
 // call the bcrypt HASH method with the raw password and an integer value
 // indicating how many rounds of the salting algorithm hsould be used.
-UserSchema.statistics.hashPassword = function(password) {
+UserSchema.statics.hashPassword = function(password) {
 	return bcrypt.hash(password, 10);
 };
 
