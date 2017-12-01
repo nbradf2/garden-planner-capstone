@@ -6,3 +6,8 @@ exports.DATABASE_URL =
 exports.PORT = process.env.PORT || 8080;
 exports.JWT_SECRET = process.env.JWT_SECRET;
 exports.JWT_EXPIRY = process.env.JWT_EXPIRY || '7d';
+
+/// on mLab - will need to create a database and set values for:
+//	- JWT_SECRET
+//  - DATABASE_URL
+// in the .env file
