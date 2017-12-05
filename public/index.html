@@ -13,22 +13,60 @@
 </head>
 
 <body>
-	<header>
-		<h1><a href="index.html">GardenPlanner</a></h1>
+	<header class="row">
+		<h1>GardenPlanner</h1>
 	</header>
 
-	<section>
-		<form action="#" method="#">
-			<label for="username">Username</label>
-			<input placeholder="i.e. myname@gmail.com" type="text" name="username" id="username">
-			<label for="password">Password</label>
-			<input placeholder="i.e. 1234" type="text" name="password" id="password">
-			<button type="submit">Submit</button>
-		</form>
-		<div class="register-links">
-			<span class="new-user">New user?  <a href="register.html">Register!</a></span>
+	<section class="login-section">
+		<h2>Love to garden?</h2>
+		<p>Keep track of your growing season!</p>
+		<button type="submit" id="login-form">Log In</button>
+		<button type="submit" id="register-form">Register</button>
+	</section>
+
+	<section class="row detail-section">
+		<div class="col-4">
+			<i class="fa fa-envira"></i>
+			<p>Add your plants</p>
+		</div>
+		<div class="col-4">
+			<i class="fa fa-sun-o"></i>
+			<p>Track growth from start to harvest!</p>
+		</div>
+		<div class="col-4">
+			<i class="fa fa-pencil"></i>
+			<p>Journal your favorite tips and tricks!</p>
 		</div>
 	</section>
+
+	<section class="row" id="login-page">
+		<h2>Log In</h2>
+		<form action="" method="get">
+			<label for="GET-username">Username:</label>
+			<input type="text" name="GET-username" placeholder="i.e. myname@gmail.com">
+			<label for="GET-password">Password:</label>
+			<input type="text" name="GET-password" placeholder="i.e. 1234">
+			<button type="submit" class="sign-in">Sign In</button>
+			<p>Not a registered user?  <a href="#">Sign up</a> now!</p>
+		</form>
+	</section>
+
+	<section class="row" id="register-page">
+		<h2>Register</h2>
+		<form action="" method="post">
+			<label for="POST-username">Select username:</label>
+			<input type="text" name="POST-username" placeholder="i.e. myname@gmail.com">
+			<label for="POST-password">Enter password:</label>
+			<input type="text" name="POST-password" placeholder="i.e. 1234">
+			<label for="retype-password">Retype password:</label>
+			<input type="text" name="retype-password" placeholder="i.e. 1234">
+			<button type="submit" id="sign-up">Sign-me up!</button>
+		</form>
+	</section>
+
+	<footer class="row">
+		<p>&copy Nicole Bradford</p>
+	</footer>
 
  	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
    	<script src="app.js"></script>

@@ -37,5 +37,29 @@ var MOCK_GARDEN_LIST =
 		}
 	]
 
+// AJAX request to get
+// if response from AJAX is success code (200/201) - display results
+// else if 400/500, disply error messaage
+// should have div that's hidden with id="error"; if a response comes back with error
+// this error message will display on html
+
+$(document).ready(function() {
+
+// on landing page, hide #login-page and #register-page; show #login-section and #detail-section
+
+	$("#login-page").hide();
+	$("#register-page").hide();
+	$(".login-section").show();
+	$(".detail-section").show();
+
+	$("#login-form").click(function() {
+		$("#register-page").hide();
+		$(".login-section").hide();
+		$(".detail-section").hide();
+		$("#login-page").show();
+	})
 
 
+})
+
+		

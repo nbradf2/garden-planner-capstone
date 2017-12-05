@@ -8,36 +8,37 @@
 	<link href="https://fonts.googleapis.com/css?family=Barlow:400,600|Montserrat" rel="stylesheet">
 	<script src="https://use.fontawesome.com/5cc30cf6d4.js"></script>
 	<link rel="stylesheet" href="css/normalize.css">
-   <link rel="stylesheet" href="css/grid.css">
-   <link rel="stylesheet" href="css/main.css">
+   	<link rel="stylesheet" href="css/grid.css">
+   	<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-	<header class="nav-bar">
-		<h1 class="#"><a href="index.html">GardenPlanner</a></h1>
-		<nav>
-			<!-- <p><a href="index.html">Log out</a></p> -->
-		</nav>
+	<header class="row">
+		<h1>GardenPlanner</h1>
 	</header>
 
-	<section class="row content">
+	<section class="row">
+		<h2>Hello <span id="name">Name</span>, look what you have growing today!</h2>
 
-		<div class="col-6" id="plant-list">
-			<div>
-				<h2>Tomato</h2>
-				<p>Date Started: </p>
-				<p>Date to Harvest:  </p>
-				<p>Comments</p>
+		<div class="plantSection">
+			<p class="plantName">Tomato</p>
+			<div class="plantInfo">
+				<p>Started: 05/23/17</p>
+				<p>Ready to Harvest: 07/30/17</p>
+				<p>Comments: Ipsum lorem dolor sit amet.</p>
+				<button type="submit" class="update-plant">Update</button>
+				<button type="submit" class="delete-plant">Delete</button>
 			</div>
 		</div>
-
-	<!-- 	<div class="col-6" id="journal">
-				<h2>Journal</h2>
-				<p>Content goes here...</p>
-		</div> -->
+		<button type="submit" id="add-plant">Add a plant</button>
 	</section>
+
+	<footer class="row">
+		<p>&copy Nicole Bradford</p>
+	</footer>
+
  	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-   <script src="app.js"></script>
+   	<script src="app.js"></script>
 </body>
 </html>
 

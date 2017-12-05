@@ -1,9 +1,9 @@
-/*
-Colors:
-Text/Dark:  #202421;
-Background/Light: #FEFDFB;
-Red: #F04F48;
-Yellow: #FEC57C;
+
+/*Colors:
+Text/Dark:  #2C363F;
+Background/Light: #FBF7F5;
+Red: #890620;
+Yellow: #E8C547;
 Green: #0E8358;
 */
 
@@ -32,158 +32,83 @@ Green: #0E8358;
 /***** GENERAL STYLES *****/
 
 body {
-	background-color: #FEFDFB;
-	/*background-image: url("../images/vegetable-basket.jpg")
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;*/
-	color: #202421;
-	font-family: 'Barlow', sans-serif;
+	background-color: #FBF7F5;
+	color: #2C363F;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
 /*	text-align: center;*/
 }
 
-h1 {
+button {
+	background-color: #E8C547;
+	height: 3rem;
+	width: 8rem;
+	margin: 0.8rem;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 2rem;
-	color: #0E8358;
-	margin-top: 2rem;
 	text-align: center;
-}
-
-header, section {
-	width: 80%;
-	margin: 0 auto;
-}
-
-/***** LINKS *****/
-
-a {
-	text-decoration: none;
-	color: #0E8358;
-}
-
-/***** LANDING PAGE *****/
-
-form, label, input, button {
-	width: 100%;
-	display: block;
-	margin: 0 auto;
-}
-
-form {
-	border: 1px solid #F04F48;
 	border-radius: 5px;
-	margin-top: 2rem;
-	padding: 1rem;
 }
 
-form label {
-	text-align: left;
-}
-
-form input {
-	margin-top: 0.2rem;
-	margin-bottom: 1rem;
-	padding-left: 0.5rem;
-	height: 1.8rem;
-	font-family: 'Barlow', sans-serif;
-	font-size: 1rem;
-	border: 0.5px solid #FEC57C;
-	border-radius: 3px;
-}
-
-form button {
-	font-family: 'Barlow', sans-serif;
-	border: 0.5px solid #F04F48;
-	border-radius: 3px;
-	height: 1.8rem;
-	background-color: #F04F48;
-}
-
-.register-links {
-	width: 100%;
-	margin: 0 auto;
-	font-size: 1rem;
-}
-
-.new-user, .forgot-password {
-	margin: 0.5rem;
+footer {
+	height: 10px;
+	margin-top: 1rem;
 	text-align: center;
-	display: block;
+	font-size: .8rem;
 }
 
-/***** HOME PAGE *****/
+/***** INDEX *****/
 
-.nav-bar {
-	border-bottom: 2px solid #F04F48;
-	padding-bottom: 0.5rem;
+.login-section, .detail-section {
+	text-align: center;
 }
 
-.nav-bar h1 {
+.login-section {
+/*	font-size: 1.8rem;*/
+	color: #FBF7F5;
+	background-image: url("../images/vegetable-basket1.jpg");
+	padding-top: 11rem;
+	padding-bottom: 11rem;
+}
+
+.login-section h2 {
+	font-size: 4rem;
+	padding-bottom: 1rem;
+}
+
+.login-section p {
+	font-size: 1.5rem;
+	padding-bottom: 1rem;
+}
+
+.login-section button {
 	font-size: 1.5rem;
 }
 
-/*.nav-bar p{
-	text-align: right;
-}*/
-
-.content {
-	margin-top: 2rem;
-	padding: 1rem;
+.detail-section {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
-#plant-list, #journal {
-	border: 1px solid #F04F48;
-/*	text-align: left;*/
+.fa {
+	margin-bottom: 1rem;
+	padding: 2rem;
+	font-size: 4rem;
+	border: 1px solid #282229;
+	border-radius: 50%;
 }
 
-#plant-list {
-	margin-right: 0.5rem;
+.fa-envira {
+	color: #0E8358;
 }
 
-#journal {
-	margin-left: 0.5rem;
+.fa-sun-o {
+	color: #E8C547;
+}
+
+.fa-pencil {
+	color: #2C363F;
 }
 
 
-/***** MEDIA QUERIES *****/
+/***** LOG-IN PAGE *****/
 
-@media only screen and (min-width: 600px) {
-	.register-links {
-		width: 90%;
-	}
-
-	.new-user, .forgot-password {
-		display: inline-block;
-	}
-
-	.new-user {
-		float: left;
-	}
-
-	.forgot-password {
-		float: right;
-	}
-
-	.nav-bar h1 {
-		display: inline-block;
-		text-align: left;
-	}
-}
-
-@media only screen and (min-width: 900px) {
-
-	form, label, input, button, .register-links {
-		width: 80%;
-	}
-
-}
-
-@media only screen and (min-width: 1200px) {
-
-	form, .register-links {
-		width: 60%;
-	}
-
-}

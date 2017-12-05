@@ -64,38 +64,12 @@ app.use('*', (req, res) => {
 	return res.status(404).json({message: 'Not Found'});
 });
 
-
-
-
 //***********************************
-
-
 
 // 'public' - already directs to localhost 8080
 app.use(express.static('public'));
 
-// have named paths:
-//	- i.e. call it garden
-//	- 1st: get/garden/
-//	- next get/garden/:id
-// - post to same route
-app.get('/', (req, res) => {
-	
-});
 
-app.get('/', (req, res) => {
-	
-});
-
-app.get('/', (req, res) => {
-	
-});
-
-app.get('/', (req, res) => {
-	
-});
-
-//************************************
 
 // app.use('/endpoint', router);
 
