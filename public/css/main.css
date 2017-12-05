@@ -49,6 +49,16 @@ button {
 	border-radius: 5px;
 }
 
+input {
+	height: 2.5rem;
+	border-radius: 5px;
+	padding-left: 0.5rem;
+}
+
+input::placeholder {
+	padding-left: 0.5rem;
+}
+
 footer {
 	height: 10px;
 	margin-top: 1rem;
@@ -66,8 +76,8 @@ footer {
 /*	font-size: 1.8rem;*/
 	color: #FBF7F5;
 	background-image: url("../images/vegetable-basket1.jpg");
-	padding-top: 11rem;
-	padding-bottom: 11rem;
+	padding-top: 10rem;
+	padding-bottom: 10rem;
 }
 
 .login-section h2 {
@@ -85,7 +95,7 @@ footer {
 }
 
 .detail-section {
-	margin-top: 1.5rem;
+	margin-top: 3rem;
 	margin-bottom: 1.5rem;
 }
 
@@ -93,7 +103,7 @@ footer {
 	margin-bottom: 1rem;
 	padding: 2rem;
 	font-size: 4rem;
-	border: 1px solid #282229;
+	border: 1px solid #2C363F;
 	border-radius: 50%;
 }
 
@@ -110,5 +120,59 @@ footer {
 }
 
 
-/***** LOG-IN PAGE *****/
+/***** LOG-IN/REGISTER PAGE *****/
 
+#login-page, #register-page {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+#login-page h2 {
+	font-size: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+#login-page form {
+	margin: 0 auto;
+	text-align: left;
+	width: 60%;
+}
+
+#login-page input {
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+#login-page button {
+	display: block;
+	width: 100%;
+	margin-left: 0;
+}
+
+#register-page form {
+	margin: 0 auto;
+	text-align: left;
+	width: 60%;
+}
+
+#register-page h2 {
+	font-size: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+#register-page input {
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+#register-page button {
+	display: block;
+	width: 100%;
+	margin-left: 0;
+}

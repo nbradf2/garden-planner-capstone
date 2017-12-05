@@ -59,6 +59,14 @@ $(document).ready(function() {
 		$("#login-page").show();
 	})
 
+	$("#register-form").click(function() {
+		$("#login-page").hide();
+		$(".login-section").hide();
+		$(".detail-section").hide();
+		$("#register-page").show();
+	})
+
+	
 
 })
 
