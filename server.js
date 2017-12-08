@@ -16,6 +16,9 @@ const {PORT, DATABASE_URL} = require('./config');
 
 const app = express();
 
+// 'public' - already directs to localhost 8080
+app.use(express.static('public'));
+
 // logging
 app.use(morgan('common'));
 
@@ -66,8 +69,7 @@ app.use('*', (req, res) => {
 
 //***********************************
 
-// 'public' - already directs to localhost 8080
-app.use(express.static('public'));
+
 
 
 

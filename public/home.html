@@ -20,16 +20,45 @@
 	<section class="row">
 		<h2>Hello <span id="name">Name</span>, look what you have growing today!</h2>
 
-		<div class="plantSection">
-			<p class="plantName">Tomato</p>
-			<div class="plantInfo">
-				<p>Started: 05/23/17</p>
-				<p>Ready to Harvest: 07/30/17</p>
-				<p>Comments: Ipsum lorem dolor sit amet.</p>
-				<button type="submit" class="update-plant">Update</button>
-				<button type="submit" class="delete-plant">Delete</button>
+		<section class="plantListSection">
+			<div id="plantSection">
+				<p class="plant-name">Tomato</p>
+				<div class="plantInfo">
+					<p class="start-date">Started: 05/23/17</p>
+					<p class="harvest-date">Ready to Harvest: 07/30/17</p>
+					<p class="plant-comments">Comments: Ipsum lorem dolor sit amet.</p>
+					<button type="submit" class="update-plant">Update</button>
+					<button type="submit" class="delete-plant">Delete</button>
+				</div>
 			</div>
-		</div>
+		</section>
+
+		<form action="" method="post" id="updatePlantSection">
+			<h2>What do you want to update?</h2>
+			<label for="updatePlant">Plant:</label>
+			<input type="text" name="updatePlant" id="updatePlant">
+			<label for="updateStartDate">Start Date:</label>
+			<input type="text" name="updateStartDate" id="updateStartDate">
+			<label for="updateHarvestDate">Harvest Date:</label>
+			<input type="text" name="updateHarvestDate">
+			<label for="updateComments">Comments:</label>
+			<input type="text" name="updateComments" id="updateComments">
+			<button type="submit" id="updatePlantInfo">Update it!</button>
+		</form>
+
+		<form action="" method="post" id="addPlantSection">
+			<h2>What do you want to add?</h2>
+			<label for="addPlantName">Plant:</label>
+			<input type="text" name="addPlantName" id="addPlantName" placeholder="i.e. Tomato">
+			<label for="addStartDate">Start Date:</label>
+			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy">
+			<label for="addHarvestDate">Harvest Date:</label>
+			<input type="text" name="addHarvestDate" placeholder="mm/dd/yyyy">
+			<label for="addComments">Comments:</label>
+			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
+			<button type="submit" id="addPlantInfo">Add it!</button>
+		</form>
+
 		<button type="submit" id="add-plant">Add a plant</button>
 	</section>
 

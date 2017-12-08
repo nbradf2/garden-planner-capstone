@@ -14,8 +14,3 @@ const gardenSchema = mongoose.Schema({
 const Garden = mongoose.model('Garden', gardenSchema);
 
 module.exports = {Garden};
-
-
-
-
-

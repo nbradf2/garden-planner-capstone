@@ -36,23 +36,36 @@ body {
 	color: #2C363F;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
-/*	text-align: center;*/
 }
 
 button {
 	background-color: #E8C547;
 	height: 3rem;
 	width: 8rem;
-	margin: 0.8rem;
+/*	margin: 0.8rem;*/
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	border-radius: 5px;
 }
 
+form {
+	margin: 0 auto;
+	text-align: left;
+	width: 60%;
+}
+
+/*form h2 {
+
+}*/
+
 input {
 	height: 2.5rem;
 	border-radius: 5px;
 	padding-left: 0.5rem;
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	margin-top: 1rem
 }
 
 input::placeholder {
@@ -122,6 +135,10 @@ footer {
 
 /***** LOG-IN/REGISTER PAGE *****/
 
+#login-form, #register-form {
+	margin: 0.5rem;
+}
+
 #login-page, #register-page {
 	margin-top: 2rem;
 	text-align: center;
@@ -133,17 +150,10 @@ footer {
 	margin-bottom: 2rem;
 }
 
-#login-page form {
-	margin: 0 auto;
-	text-align: left;
-	width: 60%;
-}
-
-#login-page input {
-	display: block;
-	width: 100%;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
+#register-page h2 {
+	font-size: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 }
 
 #login-page button {
@@ -152,27 +162,34 @@ footer {
 	margin-left: 0;
 }
 
-#register-page form {
-	margin: 0 auto;
-	text-align: left;
-	width: 60%;
-}
-
-#register-page h2 {
-	font-size: 2rem;
-	margin-top: 2rem;
-	margin-bottom: 2rem;
-}
-
-#register-page input {
-	display: block;
-	width: 100%;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
-}
-
 #register-page button {
 	display: block;
 	width: 100%;
 	margin-left: 0;
+}
+
+/***** HOME *****/
+
+#plantSection {
+	margin-top: 2rem;
+	padding: 1rem;
+	font-size: 1.5rem;
+	border: 1px solid #890620;
+
+}
+
+#plantSection p {
+	margin-bottom: 1rem;
+}
+
+#updatePlantSection {
+	margin: 1rem;	
+}
+
+#addPlantSection {
+	margin: 1rem;
+}
+
+#add-plant {
+	margin-top: 1rem;
 }

@@ -1,5 +1,5 @@
 exports.DATABASE_URL = 
-	process.env.DATABASE_URL ||
+	process.env.MONGODB_URI ||
 	global.DATABASE_URL ||
 	'mongodb://localhost/garden';
 
