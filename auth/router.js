@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
 const config = require('../config');
 
@@ -15,6 +16,8 @@ const createAuthToken = user => {
 };
 
 const router = express.Router();
+router.use(bodyParser.json());
+
 
 // protects the /api/auth/login endpoint
 router.post(

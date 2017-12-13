@@ -1,5 +1,5 @@
 // allow users to provide credentials in order to access endpoints
-// using passport.js to set up a basic authentication strategy:
+// using passport.js to set up a local authentication strategy:
 // - retrieve UN and pass from request's Auth header
 // - check if they are valid
 // - use the strategy to protect the /api/auth/login endpoint
@@ -15,7 +15,7 @@ const {
 const {User} = require('../users/models');
 const {JWT_SECRET} = require('../config');
 
-// BASIC authentication strategy (to use, register in server.js):
+// LOCAL authentication strategy (to use, register in server.js):
 const localStrategy = new LocalStrategy((username, password, callback) => {
 	let user;
 	// look for a user with the supplied username:

@@ -19,11 +19,27 @@ const {Garden} = require('./models');
 // 3. If has header auth prop, will respond with 200
 
 // will need to put this middleware line on ALL of the get/put/post/delete - all internal routes need authentication EXCEPT register/new-user
+// is global route - will get ALL Records
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	// make call to database first
 	// get response - if not response, send back 500.  if
 	Garden
 		.find()
+		.exec()
+		.then(plants => {
+			res.status(200).json(plants)
+		})
+		.catch(err => {
+			res.status(500).json({message: 'Internal server error'});
+		})
+});
+
+// to make get request to this, endpoint is garden/user/${currentUser}
+router.get('/user/:user', passport.authenticate('jwt', {session: false}), (req, res) => {
+	// make call to database first
+	// get response - if not response, send back 500.  if
+	Garden
+		.find({user: `${req.params.user}`})
 		.exec()
 		.then(plants => {
 			res.status(200).json(plants)

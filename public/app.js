@@ -147,11 +147,6 @@ function handlePlantDelete() {
 	});
 }
 
-function signIn(username, password) {
-
-}
-
-
 
 
 $(document).ready(function() {
@@ -184,8 +179,6 @@ $(document).ready(function() {
 		$("#register-page").show();
 	})
 
-
-
 // LOGIN - issue a POST request to path api-auth-login set header with key authorization and Basic encoding, to return a JWT
 	// save in local storage
 	// later when you want to send a request, will send request to BEARER + token
@@ -197,15 +190,18 @@ $(document).ready(function() {
 		let username = $("#GET-username").val();
 		let password = $("#GET-password").val();
 		let user = {username, password};
+		// console.log("client-side user:" user) <= broke code
 		let settings = {
 			url:"/auth/login",
 			type: 'POST',
-			contentType: 'application-json',
+			contentType: 'application/json',
 			data: JSON.stringify(user),
 			success: function(data) {
-				console.log('successfully logged in')
+				console.log('successfully logged in');
 				localStorage.setItem("authToken", data.authToken);
-				// IS THIS CORRECT???
+				// tells me who the user is and their own records
+				// can set in named parameter 
+				localStorage.setItem("currentUser", username);
 				window.location = "home.html";
 			},
 			error: function(err) {
@@ -217,11 +213,10 @@ $(document).ready(function() {
 	}) 
 
 // #sign-up
-	// IS THIS CORRECT???
 	$("#registerForm").submit(function(e) {
 		e.preventDefault();
 		let username = $("#POST-username").val();
-		console.log('client-side username is:', username)
+		console.log('client-side username is:', username);
 		let password = $("#POST-password").val();
 		let retypePass = $("#retype-password").val();
 		let user = {username, password};
@@ -233,7 +228,6 @@ $(document).ready(function() {
 			data: JSON.stringify(user),
 			success: function(data) {
 				console.log('successfully registered')
-				localStorage.setItem("authToken", data.authToken);
 				$("#register-page").hide();
 				$(".login-section").hide();
 				$(".detail-section").hide();
@@ -267,6 +261,8 @@ $(document).ready(function() {
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
 	})
+
+	// additional property in record:  user = localStorage.getItem...
 
 	$(function() {
 		// will move to another spot where needed

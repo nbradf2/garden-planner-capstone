@@ -11,7 +11,6 @@ const jsonParser = bodyParser.json();
 // POST to register a new user
 router.post('/', jsonParser, (req, res) => {
 	// Ensure that the username and password are defined
-	// THIS IS WHERE THE ISSUE IS - FIND IN CLIENT SIDE - username and password are not defined
 	console.log('server-side username is: ', req.body.username);
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
@@ -89,8 +88,21 @@ router.post('/', jsonParser, (req, res) => {
 
 	let username = req.body.username;
 	let password = req.body.password;
+	let retypePass = req.body.retypePass;
 	let firstName = '';
 	let lastName = '';
+
+	// check to see if pass and retype pass are same value
+	// if (password !== retypePass) {
+	// 	return res.status(422).json({
+	// 		code: 422,
+	// 		reason: 'ValidationError',
+	// 		message: 'Passwords do not match',
+	// 		location: retypePass
+	// 	});
+	// }
+
+	
 	// let {username, password, firstName = '', lastName = ''} = req.body;
 	// UN and pass come in pre-trimmed, otherwise throw error:
 	firstName = firstName.trim();

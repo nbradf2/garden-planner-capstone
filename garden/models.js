@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // schema to represent a garden entry:
 const gardenSchema = mongoose.Schema({
+	user: {type: String, required: true},
 	name: {type: String, required: true},
 	startDate: {type: Date, required: true},
 	harvestDate: {type: Date},
