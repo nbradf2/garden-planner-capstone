@@ -55,7 +55,7 @@ router.post('/', jsonParser, (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	const item = Garden.create(req.body.name, req.body.start-date);
+	const item = Garden.create(req.body.name, req.body.startDate);
 	res.status(201).json(item);
 });
 

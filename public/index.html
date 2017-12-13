@@ -20,8 +20,8 @@
 	<section class="login-section">
 		<h2>Love to garden?</h2>
 		<p>Keep track of your growing season!</p>
-		<button type="submit" id="login-form">Log In</button>
-		<button type="submit" id="register-form">Register</button>
+		<button type="submit" id="login-button">Log In</button>
+		<button type="submit" id="register-button">Register</button>
 	</section>
 
 	<section class="row detail-section">
@@ -41,11 +41,11 @@
 
 	<section class="row" id="login-page">
 		<h2>Log In</h2>
-		<form action="" method="get">
+		<form id="loginForm">
 			<label for="GET-username">Username:</label>
 			<input type="text" name="GET-username" id="GET-username" placeholder="myname@gmail.com">
 			<label for="GET-password">Password:</label>
-			<input type="text" name="GET-password" id="GET-password" placeholder="password">
+			<input type="password" name="GET-password" id="GET-password" placeholder="password">
 			<button type="submit" id="sign-in">Sign In</button>
 			<p>Not a registered user?  <a href="#" id="register-link">Sign up</a> now!</p>
 		</form>
@@ -53,13 +53,17 @@
 
 	<section class="row" id="register-page">
 		<h2>Register</h2>
-		<form action="" method="post">
+		<form id="registerForm">
+			<label for="firstName">First Name:</label>
+			<input type="text" name="firstName" id="firstName" placeholder="First Name">
+			<label for="lastName">Last Name:</label>
+			<input type="text" name="lastName" id="lastName" placeholder="Last Name">
 			<label for="POST-username">Select username:</label>
 			<input type="text" name="POST-username" id="POST-username" placeholder="myname@gmail.com">
 			<label for="POST-password">Enter password:</label>
-			<input type="text" name="POST-password" id="POST-password" placeholder="password">
+			<input type="password" name="POST-password" id="POST-password" placeholder="password">
 			<label for="retype-password">Retype password:</label>
-			<input type="text" name="retype-password" id="retype-password" placeholder="password">
+			<input type="password" name="retype-password" id="retype-password" placeholder="password">
 			<button type="submit" id="sign-up">Sign-me up!</button>
 		</form>
 	</section>

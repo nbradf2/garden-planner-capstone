@@ -11,9 +11,10 @@ const jsonParser = bodyParser.json();
 // POST to register a new user
 router.post('/', jsonParser, (req, res) => {
 	// Ensure that the username and password are defined
+	// THIS IS WHERE THE ISSUE IS - FIND IN CLIENT SIDE - username and password are not defined
+	console.log('server-side username is: ', req.body.username);
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
-
 	if (missingField) {
 		return res.status(422).json({
 			code: 422,
@@ -24,7 +25,7 @@ router.post('/', jsonParser, (req, res) => {
 	}
 
 	// Check to make sure all of the fields are strings:
-	const stringFields = ['username', 'password', 'firstName', 'lastName'];
+	const stringFields = ['firstName', 'lastName', 'username', 'password', 'retypePass'];
 	const nonStringField = stringFields.find(
 		field => field in req.body && typeof req.body[field] !== 'string'
 	);
@@ -86,7 +87,11 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 
-	let {username, password, firstName = '', lastName = ''} = req.body;
+	let username = req.body.username;
+	let password = req.body.password;
+	let firstName = '';
+	let lastName = '';
+	// let {username, password, firstName = '', lastName = ''} = req.body;
 	// UN and pass come in pre-trimmed, otherwise throw error:
 	firstName = firstName.trim();
 	lastName = lastName.trim();

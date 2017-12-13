@@ -147,6 +147,10 @@ function handlePlantDelete() {
 	});
 }
 
+function signIn(username, password) {
+
+}
+
 
 
 
@@ -159,8 +163,7 @@ $(document).ready(function() {
 	$(".login-section").show();
 	$(".detail-section").show();
 
-	$("#login-form").click(function() {
-		alert("log-in was clicked!");
+	$("#login-button").click(function() {
 		$("#register-page").hide();
 		$(".login-section").hide();
 		$(".detail-section").hide();
@@ -168,25 +171,81 @@ $(document).ready(function() {
 	})
 
 	$("#register-link").click(function() {
-		alert("register link was clicked!")
 		$("#login-page").hide();
 		$(".login-section").hide();
 		$(".detail-section").hide();
 		$("#register-page").show();
 	}) 
 
-	$("#register-form").click(function() {
-		alert("register was clicked!");
+	$("#register-button").click(function() {
 		$("#login-page").hide();
 		$(".login-section").hide();
 		$(".detail-section").hide();
 		$("#register-page").show();
 	})
 
+
+
+// LOGIN - issue a POST request to path api-auth-login set header with key authorization and Basic encoding, to return a JWT
+	// save in local storage
+	// later when you want to send a request, will send request to BEARER + token
+
 // #sign-in
 
+	$("#loginForm").submit(function(e) {
+		e.preventDefault();
+		let username = $("#GET-username").val();
+		let password = $("#GET-password").val();
+		let user = {username, password};
+		let settings = {
+			url:"/auth/login",
+			type: 'POST',
+			contentType: 'application-json',
+			data: JSON.stringify(user),
+			success: function(data) {
+				console.log('successfully logged in')
+				localStorage.setItem("authToken", data.authToken);
+				// IS THIS CORRECT???
+				window.location = "home.html";
+			},
+			error: function(err) {
+				console.log(err);
+				// instead can write separate function 'handleError(err)'
+			}
+		};
+		$.ajax(settings);
+	}) 
 
 // #sign-up
+	// IS THIS CORRECT???
+	$("#registerForm").submit(function(e) {
+		e.preventDefault();
+		let username = $("#POST-username").val();
+		console.log('client-side username is:', username)
+		let password = $("#POST-password").val();
+		let retypePass = $("#retype-password").val();
+		let user = {username, password};
+		let settings = {
+			url:"/users/",
+			type: 'POST',
+			// application/json - make sure is forward slash
+			contentType: 'application/json',
+			data: JSON.stringify(user),
+			success: function(data) {
+				console.log('successfully registered')
+				localStorage.setItem("authToken", data.authToken);
+				$("#register-page").hide();
+				$(".login-section").hide();
+				$(".detail-section").hide();
+				$("#login-page").show();
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		};
+		$.ajax(settings);
+	})
+
 
 // on home page, hide #updatePlantSection and #addPlantSection, show plantListSection
 
@@ -197,7 +256,6 @@ $(document).ready(function() {
 // on update:  #update-plant
 
 	$(".update-plant").click(function() {
-		alert("update was clicked!")
 		$("#addPlantSection").hide();
 		$("#plantListSection").show();
 		$("#updatePlantSection").show();
@@ -205,16 +263,16 @@ $(document).ready(function() {
 
 // on add:  #add-plant
 	$("#add-plant").click(function() {
-		alert("add was clicked!")
 		$("#updatePlantSection").hide();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
 	})
 
 	$(function() {
-		addPlant();
-		updatePlant();
-		deletePlant();
+		// will move to another spot where needed
+		// addPlant();
+		// updatePlant();
+		// deletePlant();
 		handlePlantAdd();
 		handlePlantUpdate();
 		handlePlantDelete();
@@ -222,6 +280,4 @@ $(document).ready(function() {
 
 })
 
-		// LOGIN - issue a POST request to path api-auth-login set header with key authorization and Basic encoding, to return a JWT
-		// save in local storage
-		// later when you want to send a request, will send request to BEARER + token
+	

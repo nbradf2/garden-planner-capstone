@@ -19,8 +19,8 @@ const router = express.Router();
 // protects the /api/auth/login endpoint
 router.post(
 	'/login',
-	// user provides UN and pass to login using basic auth strategy in the route:
-	passport.authenticate('basic', {session: false}),
+	// user provides UN and pass to login using local auth strategy in the route:
+	passport.authenticate('local', {session: false}),
 	(req, res) => {
 		// this createAuthToken function is used in the /api/auth/login route:
 		const authToken = createAuthToken(req.user.apiRepr());

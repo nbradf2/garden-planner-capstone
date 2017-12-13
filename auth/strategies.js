@@ -5,7 +5,7 @@
 // - use the strategy to protect the /api/auth/login endpoint
 
 const passport = require('passport');
-const {BasicStrategy} = require('passport-http');
+const {Strategy: LocalStrategy} = require('passport-local');
 const {
 	// assignes Strategy export to name JwtStrategy using object destructuring:
 	Strategy: JwtStrategy,
@@ -16,7 +16,7 @@ const {User} = require('../users/models');
 const {JWT_SECRET} = require('../config');
 
 // BASIC authentication strategy (to use, register in server.js):
-const basicStrategy = new BasicStrategy((username, password, callback) => {
+const localStrategy = new LocalStrategy((username, password, callback) => {
 	let user;
 	// look for a user with the supplied username:
 	User.findOne({username: username})
@@ -69,4 +69,4 @@ const jwtStrategy = new JwtStrategy(
 	}
 );
 
-module.exports = {basicStrategy, jwtStrategy};
+module.exports = {localStrategy, jwtStrategy};

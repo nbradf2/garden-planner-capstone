@@ -8,7 +8,7 @@ const passport = require('passport');
 
 // add const for router
 const {router: usersRouter} = require('./users');
-const {router: authRouter, basicStrategy, jwtStrategy} = require('./auth');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const {router: gardenRouter} = require('./garden');
 // mongoose.Promise = global.Promise;
 
@@ -33,11 +33,11 @@ app.use(function(req, res, next) {
 	next();
 });
 
-// to use the BASIC auth strategy, register here in server.js
+// to use the local auth strategy, register here in server.js
 app.use(passport.initialize());
-// to use basic auth strategy in a route, initialize Passport
+// to use local auth strategy in a route, initialize Passport
 // and register the strategy in server.js
-passport.use(basicStrategy);
+passport.use(localStrategy);
 // to register our JWT strategy with Passport, use the passport.use method:
 passport.use(jwtStrategy);
 
