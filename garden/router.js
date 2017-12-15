@@ -62,7 +62,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', jsonParser, (req, res) => {
-	const requiredFields = ['name', 'startDate'];
+	const requiredFields = ['user', 'name', 'startDate'];
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -71,7 +71,14 @@ router.post('/', jsonParser, (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	const item = Garden.create(req.body.name, req.body.startDate);
+	
+	const item = Garden.create({
+		user: req.body.user,
+		name: req.body.name, 
+		startDate: req.body.startDate,
+		harvestDate: req.body.harvestDate,
+		comments: req.body.comments
+	});
 	res.status(201).json(item);
 });
 

@@ -39,47 +39,59 @@ let MOCK_GARDEN_LIST =
 
 let gardenItemTemplate = (
 	//form template for how plant info will display
-	'<div id="plantSection">' +
-		'<p class="plant-name"></p>' +
+	'<div class="plantItem">' +
+		'<p class="plantName"></p>' +
 		'<div class="plantInfo">' +
-			'<p class="start-date">Started: 05/23/17</p>' +
-			'<p class="harvest-date">Ready to Harvest: 07/30/17</p>' +
-			'<p class="plant-comments">Comments: Ipsum lorem dolor sit amet.</p>' +
-			'<button type="submit" class="update-plant">Update</button>' +
-			'<button type="submit" class="delete-plant">Delete</button>' +
+			'<p class="startDate"></p>' +
+			'<p class="harvestDate"></p>' +
+			'<p class="plantComments"></p>' +
+			'<button type="submit" class="updatePlant">Update</button>' +
+			'<button type="submit" class="deletePlant">Delete</button>' +
 		'</div>' +
 	'</div>'
 );
 
 let serverBase = '//localhost:8080/';
-let GARDEN_URL = serverBase + 'Garden';
+let GARDEN_URL = serverBase + 'garden';
 
-function getAndDisplayGarden() {
+
+function getAndDisplayGarden(userGardenArray) {
 	console.log('Getting garden info')
-	$.getJSON(GARDEN_URL, function(gardens) {
-		console.log('Rendering garden');
-		let gardenElement = gardens.map(function(garden) {
-			let element = $(gardenItemTemplate);
-			element.attr('id', garden.id);
-			// don't need to set attr for name
-			let plantName = element.find('.plant-name');
-			// plantName found; set to garden.name
-			plantName.text(garden.name);
-			let plantStartDate = element.find('.startDate');
-			plantStartDate.text(garden.startDate)
-			let plantHarvestDate = element.find('.harvestDate');
-			plantHarvestDate.text(garden.harvestDate)
-		});
-		// return element here?
-		$('.plantSection').html(gardenElement);
+	let user = localStorage.getItem('currentUser');
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		method: 'GET',
+		url: `${GARDEN_URL}/user/${user}`,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		contentType: 'application/json',
+		success: function(userData) {
+			console.log(userData);
+		}
 	});
-}
 
-// AJAX request to get
-// if response from AJAX is success code (200/201) - display results
-// else if 400/500, disply error messaage
-// should have div that's hidden with id="error"; if a response comes back with error
-// this error message will display on html
+
+// 	$.getJSON(`${GARDEN_URL}/user/${user}`, function(gardens) {
+// 		console.log(`Rendering ${user}'s garden`);
+// 		let gardenElement = gardens.map(function(garden) {
+// 			let element = $(gardenItemTemplate);
+// 			element.attr('id', garden.id);
+// 			// don't need to set attr for name
+// 			let plantName = element.find('.plantName');
+// 			// plantName found; set to garden.name
+// 			plantName.text(garden.name);
+// 			let plantStartDate = element.find('.startDate');
+// 			plantStartDate.text(garden.startDate)
+// 			let plantHarvestDate = element.find('.harvestDate');
+// 			plantHarvestDate.text(garden.harvestDate)
+// 			let plantComments = element.find('.plant-comments');
+// 			plantComments.text(garden.comments)
+// 		});
+// 		// return element here?
+// 		$('.plantSection').html(gardenElement);
+// 	});
+	}
 
 function addPlant(plant) {
 	console.log('Adding plant' + plant);
@@ -88,7 +100,7 @@ function addPlant(plant) {
 		url: GARDEN_URL,
 		data: JSON.stringify(plant),
 		success: function(data) {
-			getAndDisplayGarden();
+			getAndDisplayGarden(data);
 		},
 		dataType: 'json',
 		contentType: 'application/json'
@@ -103,7 +115,7 @@ function updatePlant(plant) {
 		method: 'PUT',
 		data: garden,
 		success: function(data) {
-			getAndDisplayGarden;
+			getAndDisplayGarden();
 		}
 	});
 	// add error callback
@@ -114,19 +126,26 @@ function deletePlant(plant) {
 	$.ajax({
 		url: GARDEN_URL + '/' + garden.id,
 		method: 'DELETE',
-		success: getAndDisplayGarden
+		success: getAndDisplayGarden()
 	});
 	// add error callback
 }
 
+
+
 function handlePlantAdd() {
-	$('#addPlant').submit(function(e) {
-		e.preventDefault()
-		addPlant({
-			// figure out # for .find()
-			name: $(e.currentTarget).find('#').val(),
-		});
-	});
+  $('#addPlantSection').submit(function(e) {
+    e.preventDefault();
+    let user = localStorage.getItem('currentUser');
+    addPlant({
+    	// object that matches router 'contract'
+    	user: user,
+    	name: $(e.currentTarget).find('#addPlantName').val(),
+    	startDate: $(e.currentTarget).find('#addStartDate').val(),
+    	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
+    	comments: $(e.currentTarget).find('#addComments').val()
+    });
+  });
 }
 
 function handlePlantUpdate() {
@@ -263,6 +282,8 @@ $(document).ready(function() {
 	})
 
 	// additional property in record:  user = localStorage.getItem...
+
+	// api call 
 
 	$(function() {
 		// will move to another spot where needed
