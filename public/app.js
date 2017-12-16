@@ -3,7 +3,7 @@ let GARDEN_URL = serverBase + 'garden';
 let user = localStorage.getItem('currentUser');
 let authToken = localStorage.getItem('authToken');
 
-function getGarden(userGardenArray) {
+function getGarden() {
 	console.log('Getting garden info')
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
@@ -21,12 +21,11 @@ function getGarden(userGardenArray) {
 }
 
 function showGardenResults(plantArray) {
-
 	$('#showName').html(user);
 	let buildPlantList = "";
 
 	$.each(plantArray, function (plantArrayKey, plantArrayValue) {
-		buildPlantList += `<div class="plantItem">` 
+		buildPlantList += `<div class="plantItem" data-id=${plantArrayValue._id}>` 
 		buildPlantList += `<p class="plantName">${plantArrayValue.name}</p>`
 		buildPlantList += `<div class="plantInfo">` 
 		buildPlantList += `<p class="startDate">Started: ${plantArrayValue.startDate}</p>` 
@@ -81,11 +80,11 @@ function updatePlant(plant) {
 	});
 }
 
-function deletePlant(plant) {
+function deletePlant(id) {
 	console.log(`Deleting plant ${id}`);
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
-		url: GARDEN_URL + '/' + garden.id,
+		url: GARDEN_URL + '/' + id,
 		headers: {
 			Authorization: `Bearer ${authToken}`
 		},
@@ -132,7 +131,7 @@ function handlePlantDelete() {
 		console.log('you clicked delete');
 		e.preventDefault();
 		deletePlant(
-			$(e.currentTarget).closest('.plantItem').attr('id'));
+			$(e.currentTarget).closest('.plantItem').attr('data-id'));
 	});
 }
 
@@ -178,7 +177,12 @@ $(document).ready(function() {
 				console.log('successfully logged in');
 				localStorage.setItem("authToken", data.authToken);
 				localStorage.setItem("currentUser", username);
-				window.location = "home.html";
+				$("#login-page").hide();
+				$("#register-page").hide();
+				$(".login-section").hide();
+				$(".detail-section").hide();
+				$(".home").show();
+				$("#plantListSection").show();
 				console.log(data);
 				// ADDED 12.15.17 - what is the parameter?
 				getGarden(data);
