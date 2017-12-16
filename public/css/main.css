@@ -48,6 +48,11 @@ button {
 	border-radius: 5px;
 }
 
+button:hover {
+	cursor: pointer;
+	background-color: #d6b540;	
+}
+
 form {
 	margin: 0 auto;
 	text-align: left;
@@ -73,12 +78,17 @@ input::placeholder {
 }
 
 footer {
+	position: fixed;
+	bottom: 5px;
 	height: 10px;
 	margin-top: 1rem;
 	text-align: center;
 	font-size: .8rem;
 }
 
+footer p {
+	text-align: center;	
+}
 /***** INDEX *****/
 
 .login-section, .detail-section {
