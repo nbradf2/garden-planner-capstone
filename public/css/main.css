@@ -170,20 +170,32 @@ footer {
 
 /***** HOME *****/
 
-#plantSection {
+.plantItem {
 	margin-top: 2rem;
 	padding: 1rem;
 	font-size: 1.5rem;
-	border: 1px solid #890620;
-
 }
 
-#plantSection p {
+.plantItem p {
 	margin-bottom: 1rem;
+}
+
+.plantName {
+	border-bottom: 1px solid #0E8358;
+	height: 2.5rem;
+	vertical-align: middle;
 }
 
 #updatePlantSection {
 	margin: 1rem;	
+}
+
+.updatePlant {
+	margin-right: 1rem;
+}
+
+.deletePlant {
+	margin-left: 1rem;
 }
 
 #addPlantSection {
@@ -193,3 +205,4 @@ footer {
 #add-plant {
 	margin-top: 1rem;
 }
+

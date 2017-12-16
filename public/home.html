@@ -18,38 +18,37 @@
 	</header>
 
 	<section class="row">
-		<h2>Hello <span id="showName"></span>, look what you have growing today!</h2>
-
-		<section class="plantListSection"></section>
-
-		<form action="" method="post" id="updatePlantSection">
-			<h2>What do you want to update?</h2>
-			<label for="updatePlant">Plant:</label>
-			<input type="text" name="updatePlant" id="updatePlant">
-			<label for="updateStartDate">Start Date:</label>
-			<input type="text" name="updateStartDate" id="updateStartDate">
-			<label for="updateHarvestDate">Harvest Date:</label>
-			<input type="text" name="updateHarvestDate">
-			<label for="updateComments">Comments:</label>
-			<input type="text" name="updateComments" id="updateComments">
-			<button type="submit" id="updatePlantInfo">Update it!</button>
-		</form>
-
-		<form id="addPlantSection">
-			<h2>What do you want to add?</h2>
-			<label for="addPlantName">Plant:</label>
-			<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato">
-			<label for="addStartDate">Start Date:</label>
-			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy">
-			<label for="addHarvestDate">Harvest Date:</label>
-			<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
-			<label for="addComments">Comments:</label>
-			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
-			<button type="submit" id="addPlantInfo">Add it!</button>
-		</form>
-
-		<button type="submit" id="add-plant">Add a plant</button>
+		<h2 class="col-6">Hello <span id="showName"></span>, look what you have growing today!</h2>
+		<button type="submit" id="add-plant" class="col-6">Add a plant</button>
 	</section>
+
+	<section class="plantListSection row"></section>
+
+	<form action="" method="post" id="updatePlantSection">
+		<h2>What do you want to update?</h2>
+		<label for="updatePlant">Plant:</label>
+		<input type="text" name="updatePlant" id="updatePlant">
+		<label for="updateStartDate">Start Date:</label>
+		<input type="text" name="updateStartDate" id="updateStartDate">
+		<label for="updateHarvestDate">Harvest Date:</label>
+		<input type="text" name="updateHarvestDate">
+		<label for="updateComments">Comments:</label>
+		<input type="text" name="updateComments" id="updateComments">
+		<button type="submit" id="updatePlantInfo">Update it!</button>
+	</form>
+
+	<form id="addPlantSection">
+		<h2>What do you want to add?</h2>
+		<label for="addPlantName">Plant:</label>
+		<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
+		<label for="addStartDate">Start Date:</label>
+		<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
+		<label for="addHarvestDate">Harvest Date:</label>
+		<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
+		<label for="addComments">Comments:</label>
+		<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
+		<button type="submit" id="addPlantInfo">Add it!</button>
+	</form>
 
 	<footer class="row">
 		<p>&copy Nicole Bradford</p>

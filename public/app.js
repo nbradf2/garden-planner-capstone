@@ -18,6 +18,7 @@ function getGarden(userGardenArray) {
 			showGardenResults(userData);
 		}
 	});
+}
 
 function showGardenResults(plantArray) {
 
@@ -28,14 +29,14 @@ function showGardenResults(plantArray) {
 		buildPlantList += `<div class="plantItem">` 
 		buildPlantList += `<p class="plantName">${plantArrayValue.name}</p>`
 		buildPlantList += `<div class="plantInfo">` 
-		buildPlantList += `<p class="startDate">${plantArrayValue.startDate}</p>` 
-		buildPlantList += `<p class="harvestDate">${plantArrayValue.harvestDate}</p>` 
-		buildPlantList += `<p class="plantComments">${plantArrayValue.comments}</p>` 
-		buildPlantList += `</div>` 
-		buildPlantList += `</div>`
+		buildPlantList += `<p class="startDate">Started: ${plantArrayValue.startDate}</p>` 
+		buildPlantList += `<p class="harvestDate">Harvest: ${plantArrayValue.harvestDate}</p>` 
+		buildPlantList += `<p class="plantComments">Comments: ${plantArrayValue.comments}</p>` 
 		buildPlantList += `<button type="submit" class="updatePlant">Update</button>`
 		buildPlantList += `<button type="submit" class="deletePlant">Delete</button>`
-
+		buildPlantList += `</div>` 
+		buildPlantList += `</div>`
+		
 		$('.plantListSection').html(buildPlantList);
 	});
 }
@@ -53,10 +54,12 @@ function addPlant(plant) {
 		success: function(data) {
 			getGarden(data);
 		},
+		error: function(err) {
+			console.log(err);
+		},
 		dataType: 'json',
 		contentType: 'application/json'
 	});
-	// add error callback
 }
 
 function updatePlant(plant) {
@@ -70,10 +73,12 @@ function updatePlant(plant) {
 		method: 'PUT',
 		data: garden,
 		success: function(data) {
-			getGarden();
+			getGarden(data);
+		},
+		error: function(err) {
+			console.log(err);
 		}
 	});
-	// add error callback
 }
 
 function deletePlant(plant) {
@@ -85,9 +90,14 @@ function deletePlant(plant) {
 			Authorization: `Bearer ${authToken}`
 		},
 		method: 'DELETE',
-		success: getGarden()
+		success: function(data) {
+			getGarden(data);
+		},
+		error: function(err) {
+			console.log(err);
+		}
 	});
-	// add error callback
+
 }
 
 function handlePlantAdd() {
@@ -126,11 +136,7 @@ function handlePlantDelete() {
 	});
 }
 
-
-
 $(document).ready(function() {
-
-// on landing page, hide #login-page and #register-page; show #login-section and #detail-section
 
 	$("#login-page").hide();
 	$("#register-page").hide();
@@ -157,8 +163,6 @@ $(document).ready(function() {
 		$(".detail-section").hide();
 		$("#register-page").show();
 	})
-
-// LOG-IN
 
 	$("#loginForm").submit(function(e) {
 		e.preventDefault();
@@ -187,8 +191,6 @@ $(document).ready(function() {
 		$.ajax(settings);
 	}) 
 
-// SIGN UP
-
 	$("#registerForm").submit(function(e) {
 		e.preventDefault();
 		let username = $("#POST-username").val();
@@ -216,14 +218,14 @@ $(document).ready(function() {
 		$.ajax(settings);
 	})
 
-
-// on home page, hide #updatePlantSection and #addPlantSection, show plantListSection
-
 	$("#updatePlantSection").hide();
 	$("#addPlantSection").hide();
 	$("#plantListSection").show();
 
-// on update:  #update-plant
+	// $(".plantName").click(function() {
+	// 	console.log('Plant name clicked')
+	// 	$(".plantInfo").slideToggle(100);
+	// });
 
 	$(".update-plant").click(function() {
 		$("#addPlantSection").hide();
@@ -231,28 +233,15 @@ $(document).ready(function() {
 		$("#updatePlantSection").show();
 	})
 
-// on add:  #add-plant
 	$("#add-plant").click(function() {
 		$("#updatePlantSection").hide();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
 	})
 
-	// additional property in record:  user = localStorage.getItem...
-
-	// api call 
-
 	$(function() {
-
-		// will move to another spot where needed
-		// addPlant();
-		// updatePlant();
-		// deletePlant();
 		handlePlantAdd();
 		handlePlantUpdate();
 		handlePlantDelete();
-	})
-
+	});
 })
-
-	
