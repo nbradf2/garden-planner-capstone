@@ -53,7 +53,7 @@ router.get('/:id', (req, res) => {
 	Garden
 		.findById(req.params.id)
 		.exec()
-		.then(plant => res.status(200))
+		.then(plant => res.status(200).json(plant))
 		.catch(err => {
 			console.error(err);
 			res.status(500).json({message: 'Internal server error'})

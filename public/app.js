@@ -1,63 +1,24 @@
-let MOCK_GARDEN_LIST = 
- [
-		{
-			"id": "1111111",
-			"name": "Heirloom Tomato",
-			"startDate": "April 20, 2018",
-			"harvestDate": "July 20, 2018",
-			"comments": "Use crushed eggshells to supplement"
-		},
-		{
-			"id": "2222222",
-			"name": "Carrots",
-			"startDate": "April 4, 2018",
-			"harvestDate": "July 10, 2018",
-			"comments": "Plant with rosemary"
-		},
-		{
-			"id": "3333333",
-			"name": "Basil",
-			"startDate": "May 29, 2018",
-			"harvestDate": "July 30, 2018",
-			"comments": "Good companion for tomatoes"
-		},
-		{
-			"id": "4444444",
-			"name": "Lavendar",
-			"startDate": "May 5, 2018",
-			"harvestDate": "August 1, 2018",
-			"comments": "Hard to start from seed"
-		},
-		{
-			"id": "5555555",
-			"name": "Peas",
-			"startDate": "April 4, 2018",
-			"harvestDate": "July 20, 2018",
-			"comments": "Likes cooler weather"
-		}
-	]
 
-let gardenItemTemplate = (
-	//form template for how plant info will display
-	'<div class="plantItem">' +
-		'<p class="plantName"></p>' +
-		'<div class="plantInfo">' +
-			'<p class="startDate"></p>' +
-			'<p class="harvestDate"></p>' +
-			'<p class="plantComments"></p>' +
-			'<button type="submit" class="updatePlant">Update</button>' +
-			'<button type="submit" class="deletePlant">Delete</button>' +
-		'</div>' +
-	'</div>'
-);
+// let gardenItemTemplate = (
+// 	//form template for how plant info will display
+// 	'<div class="plantItem">' +
+// 		'<p class="plantName"></p>' +
+// 		'<div class="plantInfo">' +
+// 			'<p class="startDate"></p>' +
+// 			'<p class="harvestDate"></p>' +
+// 			'<p class="plantComments"></p>' +
+// 			'<button type="submit" class="updatePlant">Update</button>' +
+// 			'<button type="submit" class="deletePlant">Delete</button>' +
+// 		'</div>' +
+// 	'</div>'
+// );
 
 let serverBase = '//localhost:8080/';
 let GARDEN_URL = serverBase + 'garden';
+let user = localStorage.getItem('currentUser');
 
-
-function getAndDisplayGarden(userGardenArray) {
+function getGarden(userGardenArray) {
 	console.log('Getting garden info')
-	let user = localStorage.getItem('currentUser');
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		method: 'GET',
@@ -68,8 +29,28 @@ function getAndDisplayGarden(userGardenArray) {
 		contentType: 'application/json',
 		success: function(userData) {
 			console.log(userData);
+			showGardenResults(userData);
 		}
 	});
+
+function showGardenResults(plantArray) {
+
+	$('#showName').html(user);
+	let buildPlantList = "";
+
+	$.each(plantArray, function (plantArrayKey, plantArrayValue) {
+		buildPlantList += `<div class="plantItem">` 
+		buildPlantList += `<p class="plantName">${plantArrayValue.name}</p>`
+		buildPlantList += `<div class="plantInfo">` 
+		buildPlantList += `<p class="startDate">${plantArrayValue.startDate}</p>` 
+		buildPlantList += `<p class="harvestDate">${plantArrayValue.harvestDate}</p>` 
+		buildPlantList += `<p class="plantComments">${plantArrayValue.comments}</p>` 
+		buildPlantList += `</div>` 
+		buildPlantList += `</div>`
+
+		$('.plantListSection').html(buildPlantList);
+	});
+}
 
 
 // 	$.getJSON(`${GARDEN_URL}/user/${user}`, function(gardens) {
@@ -95,12 +76,16 @@ function getAndDisplayGarden(userGardenArray) {
 
 function addPlant(plant) {
 	console.log('Adding plant' + plant);
+	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		method: 'POST',
 		url: GARDEN_URL,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
 		data: JSON.stringify(plant),
 		success: function(data) {
-			getAndDisplayGarden(data);
+			getGarden(data);
 		},
 		dataType: 'json',
 		contentType: 'application/json'
@@ -110,12 +95,16 @@ function addPlant(plant) {
 
 function updatePlant(plant) {
 	console.log('updating plant' + garden.id);
+	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		url: GARDEN_URL + '/' + garden.id,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
 		method: 'PUT',
 		data: garden,
 		success: function(data) {
-			getAndDisplayGarden();
+			getGarden();
 		}
 	});
 	// add error callback
@@ -123,10 +112,14 @@ function updatePlant(plant) {
 
 function deletePlant(plant) {
 	console.log('deleting plant' + garden.id);
+	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		url: GARDEN_URL + '/' + garden.id,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
 		method: 'DELETE',
-		success: getAndDisplayGarden()
+		success: getGarden()
 	});
 	// add error callback
 }
@@ -136,15 +129,17 @@ function deletePlant(plant) {
 function handlePlantAdd() {
   $('#addPlantSection').submit(function(e) {
     e.preventDefault();
-    let user = localStorage.getItem('currentUser');
     addPlant({
-    	// object that matches router 'contract'
     	user: user,
     	name: $(e.currentTarget).find('#addPlantName').val(),
     	startDate: $(e.currentTarget).find('#addStartDate').val(),
     	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
     	comments: $(e.currentTarget).find('#addComments').val()
     });
+    // hide add plant form - do I need to put all of these in?
+    $("#updatePlantSection").hide();
+	$("#addPlantSection").hide();
+	$("#plantListSection").show();
   });
 }
 
@@ -222,6 +217,8 @@ $(document).ready(function() {
 				// can set in named parameter 
 				localStorage.setItem("currentUser", username);
 				window.location = "home.html";
+				// ADDED 12.15.17
+				getGarden(user);
 			},
 			error: function(err) {
 				console.log(err);
@@ -286,6 +283,7 @@ $(document).ready(function() {
 	// api call 
 
 	$(function() {
+
 		// will move to another spot where needed
 		// addPlant();
 		// updatePlant();
