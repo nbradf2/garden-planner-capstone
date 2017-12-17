@@ -236,14 +236,12 @@ $(document).ready(function() {
 		$(this).parent().find(".plantInfo").slideToggle(300);
 	});
 
-
-	// SOMETHING IS WRONG HERE
-	// need to get ID of plant item being clicked in order to update it
-	$(".updatePlant").click(function() {
+	$("body").on("click", ".updatePlant", function() {
 		console.log('you clicked update!!');
 		$("#addPlantSection").hide();
 		$("#plantListSection").show();
 		$("#updatePlantSection").show();
+		// call function to populate update form and pass plant info into it
 	})
 
 	$("#add-plant").click(function() {
