@@ -64,7 +64,7 @@ form {
 input {
 	height: 2.5rem;
 	border-radius: 5px;
-	padding-left: 0.5rem;
+	padding-left: 1rem;
 	display: block;
 	width: 100%;
 	margin-bottom: 1rem;
@@ -73,6 +73,7 @@ input {
 
 input::placeholder {
 	padding-left: 0.5rem;
+	color: #B2B5B9;
 }
 
 /*CHANGE THIS STICKY FOOTER FLEXBOX*/
