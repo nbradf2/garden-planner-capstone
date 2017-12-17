@@ -60,7 +60,38 @@ function addPlant(plant) {
 	});
 }
 
-function updatePlant(id) {
+function updatePlantForm(id, element) {
+		let authToken = localStorage.getItem('authToken');
+		$.ajax({
+		method: 'GET',
+		url: `${GARDEN_URL}/${id}`,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		contentType: 'application/json',
+		success: function(plantData) {
+			console.log(plantData);
+
+			let updateTemplate = `
+			<form id="updatePlantSection" class="row" data-id=${id}>
+				<h2>Update plant record</h2>
+				<label for="updatePlantName">Plant:</label>
+				<input type="text" name="updatePlantName" id="updatePlantName" value=${plantData.name}>
+				<label for="updateStartDate">Start Date:</label>
+				<input type="text" name="updateStartDate" id="updateStartDate" value=${plantData.startDate}>
+				<label for="updateHarvestDate">Harvest Date:</label>
+				<input type="text" name="updateHarvestDate" value=${plantData.harvestDate}>
+				<label for="updateComments">Comments:</label>
+				<input type="text" name="updateComments" id="updateComments" value=${plantData.comments}>
+				<button type="submit" id="updatePlantInfo" class="homePageButtons">Update it!</button>
+			</form>`
+			$(element).find(".plantInfo").hide();
+			$(element).after(updateTemplate);
+		}
+	});
+}
+
+function updatePlant(id, plant) {
 	console.log(`Updating plant ${id}`);
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
@@ -69,7 +100,9 @@ function updatePlant(id) {
 			Authorization: `Bearer ${authToken}`
 		},
 		method: 'PUT',
-		// data: garden,
+		dateType: 'json',
+		contentType: 'application/json',
+		data: JSON.stringify(plant),
 		success: function(data) {
 			getGarden(data);
 		},
@@ -238,11 +271,36 @@ $(document).ready(function() {
 
 	$("body").on("click", ".updatePlant", function() {
 		console.log('you clicked update!!');
-		$("#addPlantSection").hide();
-		$("#plantListSection").show();
-		$("#updatePlantSection").show();
+		let plant = $(this).parent().parent();
+		let id = $(this).parent().parent().attr("data-id");
+		console.log(id);
+		updatePlantForm(id, plant);
+		// $("#addPlantSection").hide();
+		// $("#plantListSection").show();
+		// $("#updatePlantSection").show();
 		// call function to populate update form and pass plant info into it
 	})
+
+// TODO: 
+	$("body").on("submit", "#updatePlantSection", function(e) {
+		e.preventDefault();
+		let id = $(this).attr("data-id")
+		console.log(`you submitted updatePlantSection for ${id}`);
+		let updatedPlant = {
+			id: id,
+			name: $('#updatePlantName').val(),
+			startDate: $('#updateStartDate').val(),
+			harvestDate: $('#updateHarvestDate').val(),
+			comments: $('#updateComments').val(),
+		}
+		updatePlant(id, updatedPlant);
+		console.log("plant updated")
+		// $("#addPlantSection").hide();
+		// $("#plantListSection").show();
+		// $("#updatePlantSection").show();
+		// call function to populate update form and pass plant info into it
+	})
+
 
 	$("#add-plant").click(function() {
 		console.log('you clicked add plant!');
