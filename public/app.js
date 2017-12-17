@@ -26,7 +26,7 @@ function showGardenResults(plantArray) {
 	$.each(plantArray, function (plantArrayKey, plantArrayValue) {
 		buildPlantList += `<div class="plantItem" data-id=${plantArrayValue._id}>` 
 		buildPlantList += `<p class="plantName">${plantArrayValue.name}</p>`
-		buildPlantList += `<div class="plantInfo">` 
+		buildPlantList += `<div class="plantInfo" style="display:none">` 
 		buildPlantList += `<p class="startDate">Started: ${plantArrayValue.startDate}</p>` 
 		buildPlantList += `<p class="harvestDate">Harvest: ${plantArrayValue.harvestDate}</p>` 
 		buildPlantList += `<p class="plantComments">Comments: ${plantArrayValue.comments}</p>` 
@@ -229,11 +229,13 @@ $(document).ready(function() {
 	$("#addPlantSection").hide();
 	$("#plantListSection").show();
 
-	//  SOMETHING IS WRONG HERE
-	$(".plantName").click(function() {
-		console.log('Plant name clicked')
-		$(".plantInfo").slideToggle(100);
+	$("body").on("click", ".plantName", function() {
+		console.log("you clicked the plant name");
+		event.preventDefault();
+		// $(this).slideToggle(300).siblings(".plantName");
+		$(this).parent().find(".plantInfo").slideToggle(300);
 	});
+
 
 	// SOMETHING IS WRONG HERE
 	// need to get ID of plant item being clicked in order to update it
