@@ -237,7 +237,7 @@ $(document).ready(function() {
 
 	// SOMETHING IS WRONG HERE
 	// need to get ID of plant item being clicked in order to update it
-	$(".update-plant").click(function() {
+	$(".updatePlant").click(function() {
 		console.log('you clicked update!!');
 		$("#addPlantSection").hide();
 		$("#plantListSection").show();
