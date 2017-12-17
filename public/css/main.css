@@ -187,6 +187,11 @@ footer {
 .home h2 {
 	border-bottom: 1px solid #890620;
 	padding-bottom: 1rem;
+	font-weight: 400;
+}
+
+#showName {
+	font-weight: 600;
 }
 
 .plantItem {
