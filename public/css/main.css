@@ -7,7 +7,6 @@ Yellow: #E8C547;
 Green: #0E8358;
 */
 
-
 /***** CSS RESET *****/
 
 * {
@@ -25,24 +24,27 @@ Green: #0E8358;
     -webkit-padding-after: 0px;
     -webkit-padding-start: 0px;
     -webkit-padding-end: 0px;
-    /*  DELETE BEFORE SUBMITTING  */
-     /*border: 1px solid grey;*/
 }
 
 /***** GENERAL STYLES *****/
+
+html, body {
+	height: 100%;
+}
 
 body {
 	background-color: #FBF7F5;
 	color: #2C363F;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
+	display: flex;
+	flex-direction: column;
 }
 
 button {
 	background-color: #E8C547;
 	height: 3rem;
 	width: 8rem;
-/*	margin: 0.8rem;*/
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	border-radius: 5px;
@@ -59,10 +61,6 @@ form {
 	width: 60%;
 }
 
-/*form h2 {
-
-}*/
-
 input {
 	height: 2.5rem;
 	border-radius: 5px;
@@ -77,26 +75,25 @@ input::placeholder {
 	padding-left: 0.5rem;
 }
 
-footer {
-	position: fixed;
-	bottom: 5px;
-	height: 10px;
-	margin-top: 1rem;
-	text-align: center;
-	font-size: .8rem;
-}
+/*CHANGE THIS STICKY FOOTER FLEXBOX*/
 
 footer p {
 	text-align: center;	
+	padding-bottom: 1rem;
+	font-size: 0.8rem;
 }
+
 /***** INDEX *****/
+
+.content {
+	flex: 1 0 auto;
+}
 
 .login-section, .detail-section {
 	text-align: center;
 }
 
 .login-section {
-/*	font-size: 1.8rem;*/
 	color: #FBF7F5;
 	background-image: url("../images/vegetable-basket1.jpg");
 	padding-top: 10rem;

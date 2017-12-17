@@ -1,7 +1,6 @@
 let serverBase = '//localhost:8080/';
 let GARDEN_URL = serverBase + 'garden';
 let user = localStorage.getItem('currentUser');
-let authToken = localStorage.getItem('authToken');
 
 function getGarden() {
 	console.log('Getting garden info')
@@ -31,7 +30,7 @@ function showGardenResults(plantArray) {
 		buildPlantList += `<p class="startDate">Started: ${plantArrayValue.startDate}</p>` 
 		buildPlantList += `<p class="harvestDate">Harvest: ${plantArrayValue.harvestDate}</p>` 
 		buildPlantList += `<p class="plantComments">Comments: ${plantArrayValue.comments}</p>` 
-		buildPlantList += `<button type="submit" class="updatePlant">Update</button>`
+		buildPlantList += `<button type="submit" class="update-plant">Update</button>`
 		buildPlantList += `<button type="submit" class="deletePlant">Delete</button>`
 		buildPlantList += `</div>` 
 		buildPlantList += `</div>`
@@ -42,7 +41,7 @@ function showGardenResults(plantArray) {
 
 function addPlant(plant) {
 	console.log('Adding plant' + plant);
-	// took out authToken variable from here
+	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		method: 'POST',
 		url: GARDEN_URL,
@@ -61,16 +60,16 @@ function addPlant(plant) {
 	});
 }
 
-function updatePlant(plant) {
-	console.log('updating plant' + garden.id);
+function updatePlant(id) {
+	console.log(`Updating plant ${id}`);
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
-		url: GARDEN_URL + '/' + garden.id,
+		url: GARDEN_URL + '/' + id,
 		headers: {
 			Authorization: `Bearer ${authToken}`
 		},
 		method: 'PUT',
-		data: garden,
+		// data: garden,
 		success: function(data) {
 			getGarden(data);
 		},
@@ -109,7 +108,6 @@ function handlePlantAdd() {
     	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
     	comments: $(e.currentTarget).find('#addComments').val()
     });
-    // hide add plant form - do I need to put all of these in?
     $("#updatePlantSection").hide();
 	$("#addPlantSection").hide();
 	$("#plantListSection").show();
@@ -118,17 +116,23 @@ function handlePlantAdd() {
 
 function handlePlantUpdate() {
 	$('#updatePlantInfo').on('click', function(e) {
+		console.log('you updated your plant!');
 		e.preventDefault();
 		updatePlant({
-			// figure out # for .find()
-			name: $(e.currentTarget).find('#').val(),
+			user: user,
+			name: $(e.currentTarget).find('#updatePlantName').val(),
+			startDate: $(e.currentTarget).find('#updateStartDate').val(),
+			harvestDate: $(e.currentTarget).find('#updateHarvestDate').val(),
+			comments: $(e.currentTarget).find('#updateComments').val(),
 		});
+		$("#updatePlantSection").hide();
+		$("#addPlantSection").hide();
+		$("#plantListSection").show();
 	});
 }
 
 function handlePlantDelete() {
 	$('.plantListSection').on('click', '.deletePlant', function(e) {
-		console.log('you clicked delete');
 		e.preventDefault();
 		deletePlant(
 			$(e.currentTarget).closest('.plantItem').attr('data-id'));
@@ -184,7 +188,6 @@ $(document).ready(function() {
 				$(".home").show();
 				$("#plantListSection").show();
 				console.log(data);
-				// ADDED 12.15.17 - what is the parameter?
 				getGarden(data);
 			},
 			error: function(err) {
@@ -231,13 +234,17 @@ $(document).ready(function() {
 	// 	$(".plantInfo").slideToggle(100);
 	// });
 
+	// SOMETHING IS WRONG HERE
+	// need to get ID of plant item being clicked in order to update it
 	$(".update-plant").click(function() {
+		console.log('you clicked update!!');
 		$("#addPlantSection").hide();
 		$("#plantListSection").show();
 		$("#updatePlantSection").show();
 	})
 
 	$("#add-plant").click(function() {
+		console.log('you clicked add plant!');
 		$("#updatePlantSection").hide();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();

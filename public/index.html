@@ -13,93 +13,95 @@
 </head>
 
 <body>
-	<header class="row">
-		<h1>GardenPlanner</h1>
-	</header>
+	<div class="content">
+		<header class="row">
+			<h1>GardenPlanner</h1>
+		</header>
 
-	<section class="login-section">
-		<h2>Love to garden?</h2>
-		<p>Keep track of your growing season!</p>
-		<button type="submit" id="login-button">Log In</button>
-		<button type="submit" id="register-button">Register</button>
-	</section>
+		<section class="login-section">
+			<h2>Love to garden?</h2>
+			<p>Keep track of your growing season!</p>
+			<button type="submit" id="login-button">Log In</button>
+			<button type="submit" id="register-button">Register</button>
+		</section>
 
-	<section class="row detail-section">
-		<div class="col-4">
-			<i class="fa fa-envira"></i>
-			<p>Add your plants</p>
-		</div>
-		<div class="col-4">
-			<i class="fa fa-sun-o"></i>
-			<p>Track growth from start to harvest!</p>
-		</div>
-		<div class="col-4">
-			<i class="fa fa-pencil"></i>
-			<p>Journal your favorite tips and tricks!</p>
-		</div>
-	</section>
+		<section class="row detail-section">
+			<div class="col-4">
+				<i class="fa fa-envira"></i>
+				<p>Add your plants</p>
+			</div>
+			<div class="col-4">
+				<i class="fa fa-sun-o"></i>
+				<p>Track growth from start to harvest!</p>
+			</div>
+			<div class="col-4">
+				<i class="fa fa-pencil"></i>
+				<p>Journal your favorite tips and tricks!</p>
+			</div>
+		</section>
 
-	<section class="row" id="login-page">
-		<h2>Log In</h2>
-		<form id="loginForm">
-			<label for="GET-username">Username:</label>
-			<input type="text" name="GET-username" id="GET-username" placeholder="myname@gmail.com" required>
-			<label for="GET-password">Password:</label>
-			<input type="password" name="GET-password" id="GET-password" placeholder="password" required>
-			<button type="submit" id="sign-in">Sign In</button>
-			<p>Not a registered user?  <a href="#" id="register-link">Sign up</a> now!</p>
+		<section class="row" id="login-page">
+			<h2>Log In</h2>
+			<form id="loginForm">
+				<label for="GET-username">Username:</label>
+				<input type="text" name="GET-username" id="GET-username" placeholder="myname@gmail.com" required>
+				<label for="GET-password">Password:</label>
+				<input type="password" name="GET-password" id="GET-password" placeholder="password" required>
+				<button type="submit" id="sign-in">Sign In</button>
+				<p>Not a registered user?  <a href="#" id="register-link">Sign up</a> now!</p>
+			</form>
+		</section>
+
+		<section class="row" id="register-page">
+			<h2>Register</h2>
+			<form id="registerForm">
+				<label for="firstName" required>First Name:</label>
+				<input type="text" name="firstName" id="firstName" placeholder="First Name">
+				<label for="lastName">Last Name:</label>
+				<input type="text" name="lastName" id="lastName" placeholder="Last Name">
+				<label for="POST-username">Select username:</label>
+				<input type="text" name="POST-username" id="POST-username" placeholder="myname@gmail.com" required>
+				<label for="POST-password">Enter password:</label>
+				<input type="password" name="POST-password" id="POST-password" placeholder="password" required>
+				<label for="retype-password">Retype password:</label>
+				<input type="password" name="retype-password" id="retype-password" placeholder="password" required>
+				<button type="submit" id="sign-up">Sign-me up!</button>
+			</form>
+		</section>
+
+		<section class="row home" style="display:none">
+			<h2 class="col-6">Hello <span id="showName"></span>, look what you have growing today!</h2>
+			<button type="submit" id="add-plant" class="col-6">Add a plant</button>
+		</section>
+
+		<section class="plantListSection row"></section>
+
+		<form id="updatePlantSection" style="display:none" class="row">
+			<h2>What do you want to update?</h2>
+			<label for="updatePlantName">Plant:</label>
+			<input type="text" name="updatePlantName" id="updatePlantName">
+			<label for="updateStartDate">Start Date:</label>
+			<input type="text" name="updateStartDate" id="updateStartDate">
+			<label for="updateHarvestDate">Harvest Date:</label>
+			<input type="text" name="updateHarvestDate">
+			<label for="updateComments">Comments:</label>
+			<input type="text" name="updateComments" id="updateComments">
+			<button type="submit" id="updatePlantInfo">Update it!</button>
 		</form>
-	</section>
 
-	<section class="row" id="register-page">
-		<h2>Register</h2>
-		<form id="registerForm">
-			<label for="firstName" required>First Name:</label>
-			<input type="text" name="firstName" id="firstName" placeholder="First Name">
-			<label for="lastName">Last Name:</label>
-			<input type="text" name="lastName" id="lastName" placeholder="Last Name">
-			<label for="POST-username">Select username:</label>
-			<input type="text" name="POST-username" id="POST-username" placeholder="myname@gmail.com" required>
-			<label for="POST-password">Enter password:</label>
-			<input type="password" name="POST-password" id="POST-password" placeholder="password" required>
-			<label for="retype-password">Retype password:</label>
-			<input type="password" name="retype-password" id="retype-password" placeholder="password" required>
-			<button type="submit" id="sign-up">Sign-me up!</button>
+		<form id="addPlantSection" class="row">
+			<h2>What do you want to add?</h2>
+			<label for="addPlantName">Plant:</label>
+			<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
+			<label for="addStartDate">Start Date:</label>
+			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
+			<label for="addHarvestDate">Harvest Date:</label>
+			<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
+			<label for="addComments">Comments:</label>
+			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
+			<button type="submit" id="addPlantInfo">Add it!</button>
 		</form>
-	</section>
-
-	<section class="row home" style="display:none">
-		<h2 class="col-6">Hello <span id="showName"></span>, look what you have growing today!</h2>
-		<button type="submit" id="add-plant" class="col-6">Add a plant</button>
-	</section>
-
-	<section class="plantListSection row"></section>
-
-	<form id="updatePlantSection" style="display:none" class="row">
-		<h2>What do you want to update?</h2>
-		<label for="updatePlant">Plant:</label>
-		<input type="text" name="updatePlant" id="updatePlant">
-		<label for="updateStartDate">Start Date:</label>
-		<input type="text" name="updateStartDate" id="updateStartDate">
-		<label for="updateHarvestDate">Harvest Date:</label>
-		<input type="text" name="updateHarvestDate">
-		<label for="updateComments">Comments:</label>
-		<input type="text" name="updateComments" id="updateComments">
-		<button type="submit" id="updatePlantInfo">Update it!</button>
-	</form>
-
-	<form id="addPlantSection" style="display:none" class="row">
-		<h2>What do you want to add?</h2>
-		<label for="addPlantName">Plant:</label>
-		<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
-		<label for="addStartDate">Start Date:</label>
-		<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
-		<label for="addHarvestDate">Harvest Date:</label>
-		<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
-		<label for="addComments">Comments:</label>
-		<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
-		<button type="submit" id="addPlantInfo">Add it!</button>
-	</form>
+	</div>
 
 
 	<footer class="row">
