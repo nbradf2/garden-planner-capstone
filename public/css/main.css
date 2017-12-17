@@ -78,7 +78,7 @@ input::placeholder {
 
 /*CHANGE THIS STICKY FOOTER FLEXBOX*/
 
-footer p {
+footer {
 	text-align: center;	
 	padding-bottom: 1rem;
 	font-size: 0.8rem;
@@ -178,32 +178,48 @@ footer p {
 
 /***** HOME *****/
 
+.home h2 {
+	border-bottom: 1px solid #0E8358;
+	padding-bottom: 1rem;
+}
+
 .plantItem {
 	margin-top: 2rem;
-	padding: 1rem;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
+	width: 50%;
 }
 
 .plantItem p {
-	margin-bottom: 1rem;
+	margin-bottom: 1 rem;
 }
 
 .plantName {
 	border-bottom: 1px solid #0E8358;
 	height: 2.5rem;
 	vertical-align: middle;
+	font-size: 1.6rem;
+}
+
+.plantInfo {
+	padding-top: 1rem;
+}
+
+.plantInfo button {
+	margin-top: 1rem;
 }
 
 #updatePlantSection {
 	margin: 1rem;	
 }
 
-.updatePlant {
-	margin-right: 1rem;
+.homePageButtons {
+	height: 2rem;
+	width: 7rem;
+	font-size: 1rem;
 }
 
-.deletePlant {
-	margin-left: 1rem;
+.updatePlant {
+	margin-right: 1rem;
 }
 
 #addPlantSection {
@@ -211,6 +227,13 @@ footer p {
 }
 
 #add-plant {
-	margin-top: 1rem;
+	margin-top: 2rem;
 }
 
+/***** MEDIA QUERIES *****/
+
+@media only screen and (max-width: 568px) {
+	.plantItem {
+		width: 100%;
+	}
+}

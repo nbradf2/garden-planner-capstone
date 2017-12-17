@@ -30,8 +30,8 @@ function showGardenResults(plantArray) {
 		buildPlantList += `<p class="startDate">Started: ${plantArrayValue.startDate}</p>` 
 		buildPlantList += `<p class="harvestDate">Harvest: ${plantArrayValue.harvestDate}</p>` 
 		buildPlantList += `<p class="plantComments">Comments: ${plantArrayValue.comments}</p>` 
-		buildPlantList += `<button type="submit" class="update-plant">Update</button>`
-		buildPlantList += `<button type="submit" class="deletePlant">Delete</button>`
+		buildPlantList += `<button type="submit" class="updatePlant homePageButtons">Update</button>`
+		buildPlantList += `<button type="submit" class="deletePlant homePageButtons">Delete</button>`
 		buildPlantList += `</div>` 
 		buildPlantList += `</div>`
 		
