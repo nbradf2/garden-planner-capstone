@@ -229,10 +229,11 @@ $(document).ready(function() {
 	$("#addPlantSection").hide();
 	$("#plantListSection").show();
 
-	// $(".plantName").click(function() {
-	// 	console.log('Plant name clicked')
-	// 	$(".plantInfo").slideToggle(100);
-	// });
+	//  SOMETHING IS WRONG HERE
+	$(".plantName").click(function() {
+		console.log('Plant name clicked')
+		$(".plantInfo").slideToggle(100);
+	});
 
 	// SOMETHING IS WRONG HERE
 	// need to get ID of plant item being clicked in order to update it

@@ -90,6 +90,11 @@ footer {
 	flex: 1 0 auto;
 }
 
+#loginForm p {
+	margin-top: 1rem;
+	text-align: center;
+}
+
 .login-section, .detail-section {
 	text-align: center;
 }
@@ -113,6 +118,7 @@ footer {
 
 .login-section button {
 	font-size: 1.5rem;
+	margin: 1rem;
 }
 
 .detail-section {
@@ -179,7 +185,7 @@ footer {
 /***** HOME *****/
 
 .home h2 {
-	border-bottom: 1px solid #0E8358;
+	border-bottom: 1px solid #890620;
 	padding-bottom: 1rem;
 }
 
@@ -198,6 +204,10 @@ footer {
 	height: 2.5rem;
 	vertical-align: middle;
 	font-size: 1.6rem;
+}
+
+.plantName:hover {
+	cursor: pointer;
 }
 
 .plantInfo {
