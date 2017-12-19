@@ -76,6 +76,19 @@
 			<button type="submit" id="add-plant" class="homePageButtons">Add a plant</button>
 		</section>
 
+		<form id="addPlantSection" style="display:none" class="row">
+			<h2>What do you want to add?</h2>
+			<label for="addPlantName">Plant:</label>
+			<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
+			<label for="addStartDate">Start Date:</label>
+			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
+			<label for="addHarvestDate">Harvest Date:</label>
+			<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
+			<label for="addComments">Comments:</label>
+			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
+			<button type="submit" id="addPlantInfo" class="homePageButtons">Add it!</button>
+		</form>
+
 		<section class="plantListSection row"></section>
 
 		<form id="updatePlantSection" style="display:none" class="row">
@@ -89,19 +102,6 @@
 			<label for="updateComments">Comments:</label>
 			<input type="text" name="updateComments" id="updateComments">
 			<button type="submit" id="updatePlantInfo" class="homePageButtons">Update it!</button>
-		</form>
-
-		<form id="addPlantSection" style="display:none" class="row">
-			<h2>What do you want to add?</h2>
-			<label for="addPlantName">Plant:</label>
-			<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
-			<label for="addStartDate">Start Date:</label>
-			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
-			<label for="addHarvestDate">Harvest Date:</label>
-			<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
-			<label for="addComments">Comments:</label>
-			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
-			<button type="submit" id="addPlantInfo" class="homePageButtons">Add it!</button>
 		</form>
 	</div>
 

@@ -132,10 +132,6 @@ function deletePlant(id) {
 
 }
 
-function userLogout() {
-
-}
-
 function handlePlantAdd() {
   $('#addPlantSection').submit(function(e) {
     e.preventDefault();
@@ -146,6 +142,7 @@ function handlePlantAdd() {
     	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
     	comments: $(e.currentTarget).find('#addComments').val()
     });
+    $("#addPlantSection input[type='text']").val('');
     $("#updatePlantSection").hide();
 	$("#addPlantSection").hide();
 	$("#plantListSection").show();
