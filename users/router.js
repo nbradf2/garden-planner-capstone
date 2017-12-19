@@ -37,6 +37,20 @@ router.post('/', jsonParser, (req, res) => {
 			location: nonStringField
 		});
 	}
+	
+	// Check to make sure passwords match
+	// const nonMatchingPass = stringFields.find(
+	// 	field => field in req.body['password'] !== field in req.body['retypePass']
+	// );
+
+	// if (nonMatchingPass) {
+	// 	return res.status(422).json({
+	// 		code: 422,
+	// 		reason: 'ValidationError',
+	// 		message: 'Passwords do not match',
+	// 		location: nonMatchingPass
+	// 	});
+	// }
 
 	// reject values with aren't trimmed
 	const explicitlyTrimmedFields = ['username', 'password'];

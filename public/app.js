@@ -249,7 +249,8 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(user),
 			success: function(data) {
-				console.log('successfully registered')
+				console.log('successfully registered');
+				$("#registerForm input[type='text']").val('');
 				$("#register-page").hide();
 				$(".login-section").hide();
 				$(".detail-section").hide();
@@ -257,6 +258,16 @@ $(document).ready(function() {
 			},
 			error: function(err) {
 				console.log(err);
+				if (password.length < 10) {
+					$("#errorTenChar").html("Password must be at least 10 characters")
+				}
+				//TO DO: not fully functional
+				if (password.length !== retypePass.length) {
+					$("#errorMatchPass").html("Passwords must match")
+				}
+				if (password !== retypePass) {
+					$("#errorMatchPass").html("Passwords must match")
+				}
 			}
 		};
 		$.ajax(settings);

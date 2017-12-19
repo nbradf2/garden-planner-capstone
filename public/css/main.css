@@ -184,16 +184,17 @@ footer {
 	margin-bottom: 2rem;
 }
 
-#login-page button {
+#sign-up,
+#sign-in {
+	margin-bottom: 1rem;
 	display: block;
 	width: 100%;
 	margin-left: 0;
 }
 
-#register-page button {
-	display: block;
-	width: 100%;
-	margin-left: 0;
+#errorTenChar,
+#errorMatchPass {
+	color: red;
 }
 
 /***** HOME *****/
@@ -242,6 +243,15 @@ footer {
 	margin-top: 1rem;
 }
 
+#addPlantSection {
+	margin-top: 1.5rem;
+	margin-left: 0;
+}
+
+#add-plant {
+	margin-top: 2rem;
+}
+
 #updatePlantSection {
 	margin-top: 1rem;
 	margin-left: 0;
@@ -253,18 +263,13 @@ footer {
 	font-size: 1rem;
 }
 
+#addPlantInfo {
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+}
+
 .updatePlant {
 	margin-right: 1rem;
-}
-
-#addPlantSection {
-	margin-top: 1rem;
-	margin-left: 0;
-
-}
-
-#add-plant {
-	margin-top: 2rem;
 }
 
 /***** MEDIA QUERIES *****/
