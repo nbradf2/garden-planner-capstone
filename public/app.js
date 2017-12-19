@@ -4,6 +4,7 @@ let user = localStorage.getItem('currentUser');
 
 function getGarden() {
 	console.log('Getting garden info')
+
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		method: 'GET',
@@ -131,6 +132,10 @@ function deletePlant(id) {
 
 }
 
+function userLogout() {
+
+}
+
 function handlePlantAdd() {
   $('#addPlantSection').submit(function(e) {
     e.preventDefault();
@@ -204,21 +209,23 @@ $(document).ready(function() {
 		e.preventDefault();
 		let username = $("#GET-username").val();
 		let password = $("#GET-password").val();
-		let user = {username, password};
+		let userInfo = {username, password};
 		let settings = {
 			url:"/auth/login",
 			type: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify(user),
+			data: JSON.stringify(userInfo),
 			success: function(data) {
 				console.log('successfully logged in');
 				localStorage.setItem("authToken", data.authToken);
 				localStorage.setItem("currentUser", username);
+				user = username;
 				$("#login-page").hide();
 				$("#register-page").hide();
 				$(".login-section").hide();
 				$(".detail-section").hide();
 				$(".home").show();
+				$(".logout").show();
 				$("#plantListSection").show();
 				console.log(data);
 				getGarden(data);
@@ -275,13 +282,8 @@ $(document).ready(function() {
 		let id = $(this).parent().parent().attr("data-id");
 		console.log(id);
 		updatePlantForm(id, plant);
-		// $("#addPlantSection").hide();
-		// $("#plantListSection").show();
-		// $("#updatePlantSection").show();
-		// call function to populate update form and pass plant info into it
 	})
 
-// TODO: 
 	$("body").on("submit", "#updatePlantSection", function(e) {
 		e.preventDefault();
 		let id = $(this).attr("data-id")
@@ -295,19 +297,20 @@ $(document).ready(function() {
 		}
 		updatePlant(id, updatedPlant);
 		console.log("plant updated")
-		// $("#addPlantSection").hide();
-		// $("#plantListSection").show();
-		// $("#updatePlantSection").show();
-		// call function to populate update form and pass plant info into it
 	})
 
-
 	$("#add-plant").click(function() {
-		console.log('you clicked add plant!');
 		$("#updatePlantSection").hide();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
 	})
+
+	$(".logout").click(function() {
+		console.log('you clicked logout!');
+		localStorage.clear();
+		user = null;
+		window.location.reload(true);
+	});
 
 	$(function() {
 		handlePlantAdd();

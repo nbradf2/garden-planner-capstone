@@ -41,6 +41,19 @@ body {
 	flex-direction: column;
 }
 
+a {
+	text-decoration: none;
+	color: #890620;
+}
+
+a:hover {
+	font-weight: 600;
+}
+
+a:visited {
+	color: #890620;
+}
+
 button {
 	background-color: #E8C547;
 	height: 3rem;
@@ -101,7 +114,7 @@ footer {
 
 .login-section {
 	color: #FBF7F5;
-	background-image: url("../images/vegetable-basket1.jpg");
+	background-image: url("../images/vegetable-basket1-min.jpg");
 	padding-top: 10rem;
 	padding-bottom: 10rem;
 }
@@ -190,6 +203,11 @@ footer {
 	font-weight: 400;
 }
 
+.logout {
+	margin-top: 2rem;
+	text-align: right;
+}
+
 #showName {
 	font-weight: 600;
 }
@@ -205,7 +223,6 @@ footer {
 }
 
 .plantName {
-	border-bottom: 1px solid #0E8358;
 	height: 2.5rem;
 	vertical-align: middle;
 	font-size: 1.6rem;
@@ -217,6 +234,7 @@ footer {
 
 .plantInfo {
 	padding-top: 1rem;
+	border-top: 1px solid #0E8358;
 }
 
 .plantInfo button {
@@ -238,7 +256,8 @@ footer {
 }
 
 #addPlantSection {
-	margin: 1rem;
+	margin: 1rem 0;
+
 }
 
 #add-plant {
