@@ -71,7 +71,6 @@ router.post('/', jsonParser, (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	
 	const item = Garden.create({
 		user: req.body.user,
 		name: req.body.name, 
@@ -82,7 +81,7 @@ router.post('/', jsonParser, (req, res) => {
 	res.status(201).json(item);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
 	const requiredFields = ['name', 'startDate'];
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
