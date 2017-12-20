@@ -1,7 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const faker = require('faker');
+const mongoose = require('mongoose');
 
+const {Garden} = require('./models');
 const {app, runServer, closeServer} = require('../server');
+const {TEST_DATABASE_URL} = require('../config');
 
 const should = chai.should();
 const expect = chai.expect();
@@ -26,4 +30,3 @@ describe('Garden Planner', function() {
 			});
 	})
 })
-

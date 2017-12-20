@@ -129,7 +129,6 @@ function deletePlant(id) {
 			console.log(err);
 		}
 	});
-
 }
 
 function handlePlantAdd() {
