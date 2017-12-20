@@ -4,6 +4,7 @@
   "description": "Thinkful Capstone Project - GardenPlanner",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha --exit"
   },
   "repository": {
