@@ -229,6 +229,9 @@ $(document).ready(function() {
 			},
 			error: function(err) {
 				console.log(err);
+				// TO DO:
+				// if username not found
+				// if username and password don't match
 				// instead can write separate function 'handleError(err)'
 			}
 		};
@@ -307,8 +310,15 @@ $(document).ready(function() {
 		console.log("plant updated")
 	})
 
+	$("#cancel-add-plant").click(function() {
+		$("#addPlantSection input[type='text']").val('');
+		$("#addPlantSection").hide();
+		$("#cancel-add-plant").hide();
+	})
+
 	$("#add-plant").click(function() {
 		$("#updatePlantSection").hide();
+		$("#cancel-add-plant").show();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
 	})

@@ -279,3 +279,9 @@ footer {
 		width: 100%;
 	}
 }
+
+@media only screen and (min-width: 1600px) {
+	#addPlantSection {
+	margin-left: 8%;
+	}
+}
