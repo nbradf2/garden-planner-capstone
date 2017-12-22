@@ -1,4 +1,11 @@
 language: node_js
 node_js: node
-services: 
-  - mongodb
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: TLnmyd+aLoQ6Zkmvf32gQL8lPm0DoQ+lS0SHsazHE7e2Zx6DS7O7W4OUqfOsbmyCp2G/7nyBphs777za5Bw8cnq1sNK2kXT/M4HsRowprvfjjdRU6KB70PGMJdAp1HhWDkK9wvgBSmY9nHASs3ygp/E7G34+Y2hOdMx+qhHy1LZD3FhBoOjtjDIDGHOYArmtPL5ptRiCbWFQYdVUgCkUqsICS10ndbd+pKR6lPTTEpCtsLlNDdebYRCSF7PuYcIBxyeNkpPRt7zFS3LfovEuZEtdI2osfKBm86d1AtychskU3607jA1+F1zyI9bKo2mMA2t/bcJFQLI87qLUbzzXGQW0845xg0CqPPssErzik0TyU73yQPwfy25ZnRbrZy6mTiwfOqv7RcoboaF8p8J8YsEVWqfvdvtsdEZmb6P6c24L0keyLz1ahh9CsBEbMFX8azqgrU6q0E1SS0u33I9BEFCtmgvm90lDM5kPxfRjjhTV16/Q3Y3oceOg/VOv+Trc7zMqQkGoOem4lPXgpbXkVYjIwGDenJYq9bWrt/TiiTfqLydJV4IfctnlgYsGzUCuijoX18IiXVQxUIJPkQQ5PYxni9wn1pmwy1HYY3A9chcRNIZj65OCTMbx43wBA1pg3NI+QzlQxQQ4X/qPvPsYzRZycfESyxbThQolYMG99xM=
+  app: pacific-everglades-69820
+  on:
+    repo: nbradf2/garden-planner-capstone
