@@ -1,7 +1,7 @@
 exports.DATABASE_URL = 
 	process.env.MONGODB_URI ||
 	global.DATABASE_URL ||
-	'mongodb://heroku_crv9fsf8:uevnduhv7r48t4sfgsl38mguul@ds157653.mlab.com:57653/heroku_crv9fsf8';
+	'mongodb://localhost/garden';
 
 exports.PORT = process.env.PORT || 8080;
 exports.JWT_SECRET = process.env.JWT_SECRET;
