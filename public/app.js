@@ -1,5 +1,6 @@
-let serverBase = '//localhost:8080/';
-let GARDEN_URL = serverBase + 'garden';
+//let serverBase = '//localhost:8080/';
+//let GARDEN_URL = serverBase + 'garden';
+let GARDEN_URL = 'garden';
 let user = localStorage.getItem('currentUser');
 
 function getGarden() {
