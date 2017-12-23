@@ -2,6 +2,8 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+// which would be my server?
+const server = '';
 
 const {Garden} = require('../garden/models');
 const {app, runServer, closeServer} = require('../server');
@@ -11,6 +13,18 @@ const should = chai.should();
 const expect = chai.expect();
 
 chai.use(chaiHttp);
+
+let loginDetails = {
+	'username': 'tester',
+	'password': 'testertester'
+}
+
+let registerDetails = {
+	'firstName': 'testerFirstName',
+	'lastName': 'testingLastName',
+	'username': 'tester',
+	'password': 'testertester'
+}
 
 function seedGardenData() {
 	console.info('seeding garden data');
@@ -79,6 +93,23 @@ function tearDownDb() {
 	});
 }
 
+// TESTS
+
+describe('/POST Register', () => {
+	it('should Register, Login, and check token', (done) => {
+		chai.request(server)
+			.post('/')
+			.send(registerDetails)
+			.end((err, res) => {
+				res.should.have.status(201);
+				expect(res.body.state).to.be.true;
+
+				// login
+				chai.request(server)
+			})
+	})
+})
+
 describe('Garden API resourse', function() {
 
 	before(function() {
@@ -94,22 +125,22 @@ describe('Garden API resourse', function() {
 		return closeServer();
 	});
 
-	describe('GET endpoint', function() {
-		it('should return all existing plants', function() {
-			let res;
-			return chai.request(app)
-				.get('/garden')
-				.then(function(_res) {
-					res = _res;
-					res.should.have.status(200);
-					res.body.garden.should.have.length.of.at.least(1);
-					return Garden.count();
-				})
-				.then(function(count) {
-					res.body.garden.should.have.length.of(count);
-				});
-		});
-	})
+	// describe('GET endpoint', function() {
+	// 	it('should return all existing plants', function() {
+	// 		let res;
+	// 		return chai.request(app)
+	// 			.get('/garden')
+	// 			.then(function(_res) {
+	// 				res = _res;
+	// 				res.should.have.status(200);
+	// 				res.body.garden.should.have.length.of.at.least(1);
+	// 				return Garden.count();
+	// 			})
+	// 			.then(function(count) {
+	// 				res.body.garden.should.have.length.of(count);
+	// 			});
+	// 	});
+	// })
 
 })
 
