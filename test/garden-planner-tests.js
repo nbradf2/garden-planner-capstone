@@ -2,8 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
-// which would be my server?
-const server = '';
 
 const {Garden} = require('../garden/models');
 const {app, runServer, closeServer} = require('../server');
@@ -19,12 +17,7 @@ let loginDetails = {
 	'password': 'testertester'
 }
 
-let registerDetails = {
-	'firstName': 'testerFirstName',
-	'lastName': 'testingLastName',
-	'username': 'tester',
-	'password': 'testertester'
-}
+let authToken;
 
 function seedGardenData() {
 	console.info('seeding garden data');
@@ -38,8 +31,7 @@ function seedGardenData() {
 
 // used to generate a username to put in db
 function generateTestUser() {
-	console.log('creating test user');
-	const testUser = garden.createOne();
+	const testUser = Garden.createOne();
 	return User.create(testUser);
 }
 
@@ -74,6 +66,7 @@ function generateComments() {
 // generate object representing a plant unit
 function generateGardenData() {
 	return {
+		user: generateTestUser(),
 		name: generatePlantName(),
 		startDate: generateStartDate(),
 		harvestDate: generateHarvestDate(),
@@ -95,84 +88,66 @@ function tearDownDb() {
 
 // TESTS
 
-describe('/POST Register', () => {
-	it('should Register, Login, and check token', (done) => {
-		chai.request(server)
-			.post('/')
-			.send(registerDetails)
-			.end((err, res) => {
-				res.should.have.status(201);
-				expect(res.body.state).to.be.true;
 
-				// login
-				chai.request(server)
-			})
-	})
-})
 
 describe('Garden API resourse', function() {
 
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
 	});
-	beforeEach(function() {
-		return seedGardenData();
-	});
-	afterEach(function() {
-		return tearDownDb();
-	});
+	
 	after(function() {
 		return closeServer();
 	});
 
-	// describe('GET endpoint', function() {
-	// 	it('should return all existing plants', function() {
-	// 		let res;
-	// 		return chai.request(app)
-	// 			.get('/garden')
-	// 			.then(function(_res) {
-	// 				res = _res;
-	// 				res.should.have.status(200);
-	// 				res.body.garden.should.have.length.of.at.least(1);
-	// 				return Garden.count();
-	// 			})
-	// 			.then(function(count) {
-	// 				res.body.garden.should.have.length.of(count);
-	// 			});
-	// 	});
-	// })
+	describe('/POST Login', () => {
+	it('should Login, and check token', (done) => {
+		chai.request(app)
+			.post('/auth/login')
+			.send(loginDetails)
+			.then((err, res) => {
+				res.should.have.status(200);
+				authToken = res.body.authToken;
+				console.log(res.body.authToken);
+				// login
+				chai.request(app)
+			})
+			done();
+		})
+	})
+
+	describe('Test all endpoints', function() {
+		beforeEach(function() {
+			return seedGardenData();
+		});
+		afterEach(function() {
+			return tearDownDb();
+		});
+
+		it('GET/garden should return all existing plants', function(done) {
+			let res;
+			return chai.request(app)
+				.get('/garden')
+				.set('Authorization', `Bearer ${authToken}`)
+				.then(function(_res) {
+					res = _res;
+					res.should.have.status(200);
+					res.body.should.have.length.of.at.least(1);
+					return Garden.count();
+				})
+				.then(function(count) {
+					res.body.should.have.length.of(count);
+				});
+				done();
+		});
+
+
+
+
+
+
+
+	})
 
 })
 
-// router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
-// 	// make call to database first
-// 	// get response - if not response, send back 500.  if
-// 	Garden
-// 		.find()
-// 		.exec()
-// 		.then(plants => {
-// 			res.status(200).json(plants)
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({message: 'Internal server error'});
-// 		})
-// });
-
-// describe('Garden Planner', function() {
-// 	before(function() {
-// 		return runServer();
-// 	});
-
-// 	after(function() {
-// 		return closeServer();
-// 	});
-
-// 	it('should return response 200 and html', function() {
-// 		return chai.request(app)
-// 			.get('/')
-// 			.then(function(res) {
-// 				res.should.have.status(200);
-// 				res.should.be.html;
-// 			});
-// 	})
-// })

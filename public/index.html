@@ -73,24 +73,47 @@
 
 		<section class="row home" style="display:none">
 			<h2>Hello <span id="showName"></span>, look what you have growing today!</h2>
-			<button type="submit" id="add-plant" class="homePageButtons">Add a plant</button>
-			<button type="submit" id="cancel-add-plant" class="homePageButtons" style="display:none">Cancel</button>
 		</section>
 
-		<form id="addPlantSection" style="display:none" class="row">
-			<h2>What do you want to add?</h2>
-			<label for="addPlantName">Plant:</label>
-			<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
-			<label for="addStartDate">Start Date:</label>
-			<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
-			<label for="addHarvestDate">Harvest Date:</label>
-			<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
-			<label for="addComments">Comments:</label>
-			<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
-			<button type="submit" id="addPlantInfo" class="homePageButtons">Add it!</button>
-		</form>
+		
 
-		<section class="plantListSection row"></section>
+		<section class="row gardenDetails" style="display:none">
+			<div class="col-6">
+				<h2>Garden</h2>
+				<button type="submit" id="add-plant" class="homePageButtons">Add a plant</button>
+				<button type="submit" id="cancel-add-plant" class="homePageButtons" style="display:none">Cancel</button>
+
+				<form id="addPlantSection" style="display:none" class="row">
+					<h2>What do you want to add?</h2>
+					<label for="addPlantName">Plant:</label>
+					<input type="text" name="addPlantName" id="addPlantName" placeholder="Tomato" required>
+					<label for="addStartDate">Start Date:</label>
+					<input type="text" name="addStartDate" id="addStartDate" placeholder="mm/dd/yyyy" required>
+					<label for="addHarvestDate">Harvest Date:</label>
+					<input type="text" name="addHarvestDate" id="addHarvestDate" placeholder="mm/dd/yyyy">
+					<label for="addComments">Comments:</label>
+					<input type="text" name="addComments" id="addComments" placeholder="Full Sun">
+					<button type="submit" id="addPlantInfo" class="homePageButtons">Add it!</button>
+				</form>
+
+				<div class="plantListSection"></div>
+			</div>
+
+			<div class="col-6">
+				<h2>Journal</h2>
+				<button type="submit" id="add-journal-entry" class="homePageButtons">Add an entry</button>
+				<button type="submit" id="cancel-journal-entry" class="homePageButtons" style="display:none">Cancel</button>
+
+				<form id="addJournalSection" style="display:none" class="row">
+					<h2>What's new today?</h2>
+					<input type="text" name="newJournalEntry" id="newJournalEntry" placeholder="Write something!" required>
+					<button type="submit" id="addJournalEntry" class="homePageButtons">Add it!</button>
+				</form>
+
+				<div class="journalSection col-6"></div>
+			</div>
+		</section>
+		
 
 		<form id="updatePlantSection" style="display:none" class="row">
 			<h2>What do you want to update?</h2>
@@ -103,6 +126,12 @@
 			<label for="updateComments">Comments:</label>
 			<input type="text" name="updateComments" id="updateComments">
 			<button type="submit" id="updatePlantInfo" class="homePageButtons">Update it!</button>
+		</form>
+
+		<form id="updateJournalSection" style="display:none" class="row">
+			<label for="newJournalEntry">What's new today?</label>
+			<input type="text" name="updateJournalEntry" id="updateJournalEntry" placeholder="Write something!" required>
+			<button type="submit" id="updateJournalInfo" class="homePageButtons">Update it!</button>
 		</form>
 	</div>
 

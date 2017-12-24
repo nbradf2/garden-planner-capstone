@@ -1,9 +1,10 @@
 let GARDEN_URL = 'garden';
+// DELETE IF NOT WORKING
+let JOURNAL_URL = 'journal';
 let user = localStorage.getItem('currentUser');
 
 function getGarden() {
 	console.log('Getting garden info')
-
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
 		method: 'GET',
@@ -15,6 +16,23 @@ function getGarden() {
 		success: function(userData) {
 			console.log(userData);
 			showGardenResults(userData);
+		}
+	});
+}
+
+// DELETE IF NOT WORKING
+function getJournal() {
+	console.log('Getting journal info')
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		method: 'GET',
+		url: `${JOURNAL_URL}/user/${user}`,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		contentType: 'application/json',
+		success: function(userData) {
+			showJournalResults(userData);
 		}
 	});
 }
@@ -39,6 +57,21 @@ function showGardenResults(plantArray) {
 	});
 }
 
+function showJournalResults(journalArray) {
+	let buildJournal = "";
+
+	$.each(journalArray, function(journalArrayKey, journalArrayValue) {
+		// START HERE
+		buildJournal += `<div class="journalItem" data-id=${journalArrayValue._id}>`
+		buildJournal += `<h3><span class="journalDateAndTime>${journalArrayValue.publishDate}</h3>`
+		buildJournal += `<p class="journalContent>${journalArrayValue.content}</p>`
+		buildJournal += `<button type="submit" class="updateJournal homePageButtons">Update</button>`
+		buildJournal += `<button type="submit" class="deleteJournal homePageButtons">Delete</button>`
+	
+		$('.journalSection').html(buildJournal);
+	})
+}
+
 function addPlant(plant) {
 	console.log('Adding plant' + plant);
 	let authToken = localStorage.getItem('authToken');
@@ -51,6 +84,28 @@ function addPlant(plant) {
 		data: JSON.stringify(plant),
 		success: function(data) {
 			getGarden(data);
+		},
+		error: function(err) {
+			console.log(err);
+		},
+		dataType: 'json',
+		contentType: 'application/json'
+	});
+}
+
+// DELETE if not working
+function addJournalEntry(journalPosts) {
+	console.log('Adding journal post' + journalPosts);
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		method: 'POST',
+		url: JOURNAL_URL,
+		headers: {
+			Authorization: `Bearer ${authToken}` 
+		},
+		data: JSON.stringify(journalPosts),
+		success: function(data) {
+			getJournal(data);
 		},
 		error: function(err) {
 			console.log(err);
@@ -131,20 +186,37 @@ function deletePlant(id) {
 }
 
 function handlePlantAdd() {
-  $('#addPlantSection').submit(function(e) {
-    e.preventDefault();
-    addPlant({
-    	user: user,
-    	name: $(e.currentTarget).find('#addPlantName').val(),
-    	startDate: $(e.currentTarget).find('#addStartDate').val(),
-    	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
-    	comments: $(e.currentTarget).find('#addComments').val()
-    });
-    $("#addPlantSection input[type='text']").val('');
-    $("#updatePlantSection").hide();
-	$("#addPlantSection").hide();
-	$("#plantListSection").show();
+	$('#addPlantSection').submit(function(e) {
+	    e.preventDefault();
+	    addPlant({
+	    	user: user,
+	    	name: $(e.currentTarget).find('#addPlantName').val(),
+	    	startDate: $(e.currentTarget).find('#addStartDate').val(),
+	    	harvestDate: $(e.currentTarget).find('#addHarvestDate').val(),
+	    	comments: $(e.currentTarget).find('#addComments').val()
+	    });
+	    $("#addPlantSection input[type='text']").val('');
+	    $("#updatePlantSection").hide();
+		$("#addPlantSection").hide();
+		$(".plantListSection").show();
   });
+}
+
+// DELETE if not working
+function handleJournalAdd() {
+	let currentDate = new Date();
+	$("#addJournalSection").submit(function(e) {
+		e.preventDefault();
+		addJournalEntry({
+			user: user,
+			content: $(e.currentTarget).find('#newJournalEntry').val(),
+			publishDate: currentDate.toDateString()
+		});
+		$("#addJournalSection input[type='text']").val('');
+		$("#addJournalSection").hide();
+		$("#updateJournalSection").hide();
+		$(".journalSection").show();
+	})
 }
 
 function handlePlantUpdate() {
@@ -221,9 +293,10 @@ $(document).ready(function() {
 				$(".detail-section").hide();
 				$(".home").show();
 				$(".logout").show();
-				$("#plantListSection").show();
+				$(".gardenDetails").show();
 				console.log(data);
 				getGarden(data);
+				getJournal(data);
 			},
 			error: function(err) {
 				console.log(err);
@@ -276,7 +349,7 @@ $(document).ready(function() {
 
 	$("#updatePlantSection").hide();
 	$("#addPlantSection").hide();
-	$("#plantListSection").show();
+	$(".plantListSection").show();
 
 	$("body").on("click", ".plantName", function() {
 		console.log("you clicked the plant name");
@@ -321,6 +394,12 @@ $(document).ready(function() {
 		$("#addPlantSection").show();
 	})
 
+// DELETE if not working
+	$("#add-journal-entry").click(function() {
+		$("#cancel-journal-entry").show();
+		$("#addJournalSection").show();
+	})
+
 	$(".logout").click(function() {
 		console.log('you clicked logout!');
 		localStorage.clear();
@@ -330,6 +409,7 @@ $(document).ready(function() {
 
 	$(function() {
 		handlePlantAdd();
+		handleJournalAdd();
 		handlePlantUpdate();
 		handlePlantDelete();
 	});

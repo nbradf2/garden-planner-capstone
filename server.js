@@ -10,6 +10,7 @@ const passport = require('passport');
 const {router: usersRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const {router: gardenRouter} = require('./garden');
+const {router: journalRouter} = require('./journal');
 // mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config');
@@ -44,6 +45,7 @@ passport.use(jwtStrategy);
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
 app.use('/garden/', gardenRouter);
+app.use('/journal/', journalRouter);
 
 // use this to protect the /api/auth/login endpoint defined 
 // in /auth/router.js
@@ -71,7 +73,6 @@ let server;
 
 function runServer() {
 	return new Promise((resolve, reject) => {
-		console.log(DATABASE_URL);
 		mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
 			if (err) {
 				return reject(err);

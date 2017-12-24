@@ -12,6 +12,6 @@ const gardenSchema = mongoose.Schema({
 // apiRepr is used to help restructure and concatenate things for ease of use
 // _variable name is internal notation - not to be manipulated directly
 
-const Garden = mongoose.model('Garden', gardenSchema);
+const Garden = mongoose.model('Garden', gardenSchema)
 
 module.exports = {Garden};
