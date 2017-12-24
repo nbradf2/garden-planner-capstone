@@ -63,8 +63,8 @@ function showJournalResults(journalArray) {
 	$.each(journalArray, function(journalArrayKey, journalArrayValue) {
 		// START HERE
 		buildJournal += `<div class="journalItem" data-id=${journalArrayValue._id}>`
-		buildJournal += `<h3><span class="journalDateAndTime>${journalArrayValue.publishDate}</h3>`
-		buildJournal += `<p class="journalContent>${journalArrayValue.content}</p>`
+		buildJournal += `<h3 class="journalDateAndTime">${journalArrayValue.publishDate}</h3>`
+		buildJournal += `<p class="journalContent">${journalArrayValue.content}</p>`
 		buildJournal += `<button type="submit" class="updateJournal homePageButtons">Update</button>`
 		buildJournal += `<button type="submit" class="deleteJournal homePageButtons">Delete</button>`
 	
@@ -204,17 +204,19 @@ function handlePlantAdd() {
 
 // DELETE if not working
 function handleJournalAdd() {
-	let currentDate = new Date();
+	let date = new Date();
+	let currentDate = date.toLocaleDateString('en-US');
 	$("#addJournalSection").submit(function(e) {
 		e.preventDefault();
 		addJournalEntry({
 			user: user,
 			content: $(e.currentTarget).find('#newJournalEntry').val(),
-			publishDate: currentDate.toDateString()
+			publishDate: currentDate
 		});
 		$("#addJournalSection input[type='text']").val('');
 		$("#addJournalSection").hide();
 		$("#updateJournalSection").hide();
+		$("#cancel-journal-entry").hide();
 		$(".journalSection").show();
 	})
 }
@@ -395,6 +397,12 @@ $(document).ready(function() {
 	})
 
 // DELETE if not working
+	$("#cancel-journal-entry").click(function() {
+		$("#addJournalSection input[type='text']").val('');
+		$("#addJournalSection").hide();
+		$("#cancel-journal-entry").hide();
+	})
+
 	$("#add-journal-entry").click(function() {
 		$("#cancel-journal-entry").show();
 		$("#addJournalSection").show();
