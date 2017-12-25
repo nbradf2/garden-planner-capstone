@@ -1,10 +1,10 @@
 
 /*Colors:
-Text/Dark:  #2C363F;
-Background/Light: #FBF7F5; F9F9F9
+Text/Dark:  #2C363F; 
+Background/Light:  F9F9F9
 Red: #890620;
 Yellow: #E8C547;
-Green: #0E8358;
+Green: #0E8358;  65B094
 */
 
 /***** CSS RESET *****/
@@ -234,13 +234,20 @@ footer {
 
 .plantColumn,
 .journalColumn {
-	background-color: pink;
 	border-radius: 5px;
+	margin-top: 1rem;
 	margin-bottom: 1rem;
+}
+
+.journalColumn {
+	background-color: #2C363F;
+	color: #F9F9F9;
+	box-shadow: 2px 2px grey;
 }
 
 .plantColumn {
 	margin-right: 1rem;
+	background-color: ;
 }
 
 .plantItem {
@@ -286,6 +293,15 @@ footer {
 #add-journal-entry {
 	display: inline-block;
 	margin: 1rem;
+}
+
+#add-journal-entry,
+#cancel-journal-entry,
+#addJournalEntry,
+.updateJournal,
+.deleteJournal
+ {
+	background-color: #65B094;
 }
 
 #updatePlantSection {
