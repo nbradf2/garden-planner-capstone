@@ -63,9 +63,11 @@ function showJournalResults(journalArray) {
 	$.each(journalArray, function(journalArrayKey, journalArrayValue) {
 		buildJournal += `<div class="journalItem" data-id=${journalArrayValue._id}>`
 		buildJournal += `<p class="journalDateAndTime">${journalArrayValue.publishDate}</p>`
+		buildJournal += `<div class="journalInfo" style="display:none">`
 		buildJournal += `<p class="journalContent">${journalArrayValue.content}</p>`
 		buildJournal += `<button type="submit" class="updateJournal homePageButtons">Update</button>`
 		buildJournal += `<button type="submit" class="deleteJournal homePageButtons">Delete</button>`
+		buildJournal += `</div>`
 		buildJournal += `</div>`
 	
 		$('.journalSection').html(buildJournal);
@@ -443,6 +445,12 @@ $(document).ready(function() {
 		// $(this).slideToggle(300).siblings(".plantName");
 		$(this).parent().find(".plantInfo").slideToggle(300);
 	});
+
+	$("body").on("click", ".journalDateAndTime", function() {
+		console.log("you clicked the date and time");
+		event.preventDefault();
+		$(this).parent().find(".journalInfo").slideToggle(300);
+	})
 
 	$("body").on("click", ".updatePlant", function() {
 		console.log('you clicked update!!');

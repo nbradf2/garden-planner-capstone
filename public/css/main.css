@@ -229,6 +229,18 @@ footer {
 .gardenDetails h2 {
 	display: inline-block;
 	font-size: 1.8rem;
+	margin-top: 1rem;
+}
+
+.plantColumn,
+.journalColumn {
+	background-color: pink;
+	border-radius: 5px;
+	margin-bottom: 1rem;
+}
+
+.plantColumn {
+	margin-right: 1rem;
 }
 
 .plantItem {
@@ -238,7 +250,7 @@ footer {
 }
 
 .plantItem p {
-	margin-bottom: 1 rem;
+	margin-bottom: 1rem;
 }
 
 .plantName,
@@ -248,7 +260,8 @@ footer {
 	font-size: 1.6rem;
 }
 
-.plantName:hover {
+.plantName:hover,
+.journalDateAndTime:hover {
 	cursor: pointer;
 }
 
@@ -272,8 +285,7 @@ footer {
 #add-plant,
 #add-journal-entry {
 	display: inline-block;
-	margin-left: 1rem;
-	margin-right: 1rem;
+	margin: 1rem;
 }
 
 #updatePlantSection {
@@ -296,11 +308,13 @@ footer {
 .updateJournal {
 	margin-right: 1rem;
 	display: inline-block;
+	margin-bottom: 1rem
 }
 
 .deletePlant,
 .deleteJournal {
 	display: inline-block;
+	margin-bottom: 1rem
 }
 
 /***** JOURNAL SECTION *****/
@@ -324,7 +338,7 @@ footer {
 }
 
 @media only screen and (max-width: 900px) {
-	/*update here for grid switch to smaller screens*/
+
 }
 
 @media only screen and (min-width: 1600px) {
