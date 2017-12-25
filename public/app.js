@@ -145,7 +145,6 @@ function updatePlantForm(id, element) {
 	});
 }
 
-// JOURNAL UPDATE - MAY NOT WORK
 function updateJournalForm(id, element) {
 	let authToken = localStorage.getItem('authToken');
 	$.ajax({
@@ -231,6 +230,24 @@ function deletePlant(id) {
 	});
 }
 
+function deleteJournalEntry(id) {
+	console.log(`Deleting journal entry ${id}`);
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		url: JOURNAL_URL + '/' + id,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		method: 'DELETE',
+		success: function(data) {
+			getJournal(data);
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	});
+}
+
 function handlePlantAdd() {
 	$('#addPlantSection').submit(function(e) {
 	    e.preventDefault();
@@ -248,7 +265,6 @@ function handlePlantAdd() {
   });
 }
 
-// DELETE if not working
 function handleJournalAdd() {
 	$("#addJournalSection").submit(function(e) {
 		e.preventDefault();
@@ -282,7 +298,6 @@ function handlePlantUpdate() {
 	});
 }
 
-//JOURNAL UPDATE
 function handleJournalUpdate() {
 	$("#updateJournalInfo").on('click', function(e) {
 		console.log('you updated your journal!');
@@ -304,6 +319,14 @@ function handlePlantDelete() {
 		deletePlant(
 			$(e.currentTarget).closest('.plantItem').attr('data-id'));
 	});
+}
+
+function handleJournalDelete() {
+	$(".journalSection").on('click', '.deleteJournal', function(e) {
+		e.preventDefault();
+		deleteJournalEntry(
+			$(e.currentTarget).closest('.journalItem').attr('data-id'));
+	})
 }
 
 $(document).ready(function() {
@@ -504,5 +527,6 @@ $(document).ready(function() {
 		handlePlantUpdate();
 		handleJournalUpdate();
 		handlePlantDelete();
+		handleJournalDelete();
 	});
 })
