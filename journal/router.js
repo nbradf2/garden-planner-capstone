@@ -81,7 +81,7 @@ router.post('/', jsonParser, (req, res) => {
 
 // START HERE
 router.put('/:id', jsonParser, (req, res) => {
-	const requiredFields = ['name', 'startDate'];
+	const requiredFields = ['content'];
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {

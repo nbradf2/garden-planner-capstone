@@ -1,7 +1,8 @@
 let GARDEN_URL = 'garden';
-// DELETE IF NOT WORKING
 let JOURNAL_URL = 'journal';
 let user = localStorage.getItem('currentUser');
+let date = new Date();
+// let currentDate = date.toLocaleDateString('en-US');
 
 function getGarden() {
 	console.log('Getting garden info')
@@ -20,7 +21,6 @@ function getGarden() {
 	});
 }
 
-// DELETE IF NOT WORKING
 function getJournal() {
 	console.log('Getting journal info')
 	let authToken = localStorage.getItem('authToken');
@@ -61,12 +61,12 @@ function showJournalResults(journalArray) {
 	let buildJournal = "";
 
 	$.each(journalArray, function(journalArrayKey, journalArrayValue) {
-		// START HERE
 		buildJournal += `<div class="journalItem" data-id=${journalArrayValue._id}>`
 		buildJournal += `<h3 class="journalDateAndTime">${journalArrayValue.publishDate}</h3>`
 		buildJournal += `<p class="journalContent">${journalArrayValue.content}</p>`
 		buildJournal += `<button type="submit" class="updateJournal homePageButtons">Update</button>`
 		buildJournal += `<button type="submit" class="deleteJournal homePageButtons">Delete</button>`
+		buildJournal += `</div>`
 	
 		$('.journalSection').html(buildJournal);
 	})
@@ -93,7 +93,6 @@ function addPlant(plant) {
 	});
 }
 
-// DELETE if not working
 function addJournalEntry(journalPosts) {
 	console.log('Adding journal post' + journalPosts);
 	let authToken = localStorage.getItem('authToken');
@@ -116,8 +115,8 @@ function addJournalEntry(journalPosts) {
 }
 
 function updatePlantForm(id, element) {
-		let authToken = localStorage.getItem('authToken');
-		$.ajax({
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
 		method: 'GET',
 		url: `${GARDEN_URL}/${id}`,
 		headers: {
@@ -128,23 +127,49 @@ function updatePlantForm(id, element) {
 			console.log(plantData);
 
 			let updateTemplate = `
-			<form id="updatePlantSection" class="row" data-id=${id}>
-				<h2>Update plant record</h2>
-				<label for="updatePlantName">Plant:</label>
-				<input type="text" name="updatePlantName" id="updatePlantName" value=${plantData.name}>
-				<label for="updateStartDate">Start Date:</label>
-				<input type="text" name="updateStartDate" id="updateStartDate" value=${plantData.startDate}>
-				<label for="updateHarvestDate">Harvest Date:</label>
-				<input type="text" name="updateHarvestDate" value=${plantData.harvestDate}>
-				<label for="updateComments">Comments:</label>
-				<input type="text" name="updateComments" id="updateComments" value=${plantData.comments}>
-				<button type="submit" id="updatePlantInfo" class="homePageButtons">Update it!</button>
-			</form>`
+				<form class="row updatePlantSection" data-id=${id}>
+					<h2>Update plant record</h2>
+					<label for="updatePlantName">Plant:</label>
+					<input type="text" name="updatePlantName" class="updatePlantName" value=${plantData.name}>
+					<label for="updateStartDate">Start Date:</label>
+					<input type="text" name="updateStartDate" class="updateStartDate" value=${plantData.startDate}>
+					<label for="updateHarvestDate">Harvest Date:</label>
+					<input type="text" name="updateHarvestDate" class="updateHarvestDate" value=${plantData.harvestDate}>
+					<label for="updateComments">Comments:</label>
+					<input type="text" name="updateComments" class="updateComments" value=${plantData.comments}>
+					<button type="submit" id="updatePlantInfo" class="homePageButtons">Update it!</button>
+				</form>`
 			$(element).find(".plantInfo").hide();
 			$(element).after(updateTemplate);
 		}
 	});
 }
+
+// JOURNAL UPDATE - MAY NOT WORK
+function updateJournalForm(id, element) {
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		method: 'GET',
+		url: `${JOURNAL_URL}/${id}`,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		contentType: 'application/json',
+		success: function(journalData) {
+			console.log(journalData);
+
+			let updateJournalTemplate = `
+				<form class="row updateJournalSection" data-id=${id}>
+					<label for="newJournalEntry">What's new today?</label>
+					<input type="text" name="updateJournalEntry" class="updateJournalEntry" placeholder="Write something!" required value=${journalData.content}>
+					<button type="submit" id="updateJournalInfo" class="homePageButtons">Update it!</button>
+				</form>`
+				// this is wrong
+			$(element).find(".journalItem").hide();
+			$(element).after(updateJournalTemplate);
+		}
+	});
+}	
 
 function updatePlant(id, plant) {
 	console.log(`Updating plant ${id}`);
@@ -160,6 +185,27 @@ function updatePlant(id, plant) {
 		data: JSON.stringify(plant),
 		success: function(data) {
 			getGarden(data);
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	});
+}
+
+function updateJournal(id, journalPosts) {
+	console.log(`Updating journal entry ${id}`);
+	let authToken = localStorage.getItem('authToken');
+	$.ajax({
+		url: JOURNAL_URL + '/' + id,
+		headers: {
+			Authorization: `Bearer ${authToken}`
+		},
+		method: 'PUT',
+		dataType: 'json',
+		contentType: 'application/json',
+		data: JSON.stringify(journalPosts),
+		success: function(data) {
+			getJournal(data);
 		},
 		error: function(err) {
 			console.log(err);
@@ -196,7 +242,7 @@ function handlePlantAdd() {
 	    	comments: $(e.currentTarget).find('#addComments').val()
 	    });
 	    $("#addPlantSection input[type='text']").val('');
-	    $("#updatePlantSection").hide();
+	    $(".updatePlantSection").hide();
 		$("#addPlantSection").hide();
 		$(".plantListSection").show();
   });
@@ -204,18 +250,16 @@ function handlePlantAdd() {
 
 // DELETE if not working
 function handleJournalAdd() {
-	let date = new Date();
-	let currentDate = date.toLocaleDateString('en-US');
 	$("#addJournalSection").submit(function(e) {
 		e.preventDefault();
 		addJournalEntry({
 			user: user,
 			content: $(e.currentTarget).find('#newJournalEntry').val(),
-			publishDate: currentDate
+			publishDate: date.toDateString()
 		});
 		$("#addJournalSection input[type='text']").val('');
 		$("#addJournalSection").hide();
-		$("#updateJournalSection").hide();
+		$(".updateJournalSection").hide();
 		$("#cancel-journal-entry").hide();
 		$(".journalSection").show();
 	})
@@ -227,15 +271,31 @@ function handlePlantUpdate() {
 		e.preventDefault();
 		updatePlant({
 			user: user,
-			name: $(e.currentTarget).find('#updatePlantName').val(),
-			startDate: $(e.currentTarget).find('#updateStartDate').val(),
-			harvestDate: $(e.currentTarget).find('#updateHarvestDate').val(),
-			comments: $(e.currentTarget).find('#updateComments').val(),
+			name: $(e.currentTarget).find('.updatePlantName').val(),
+			startDate: $(e.currentTarget).find('.updateStartDate').val(),
+			harvestDate: $(e.currentTarget).find('.updateHarvestDate').val(),
+			comments: $(e.currentTarget).find('.updateComments').val(),
 		});
-		$("#updatePlantSection").hide();
+		$(".updatePlantSection").hide();
 		$("#addPlantSection").hide();
 		$("#plantListSection").show();
 	});
+}
+
+//JOURNAL UPDATE
+function handleJournalUpdate() {
+	$("#updateJournalInfo").on('click', function(e) {
+		console.log('you updated your journal!');
+		e.preventDefault();
+		updateJournal({
+			user: user,
+			content: $(e.currentTarget).find('.updateJournalEntry').val(),
+			publishDate: date.toDateString()
+		});
+		$("updateJournalForm").hide();
+		$("addJournalSection").hide();
+		$("journalSection").show();
+	})
 }
 
 function handlePlantDelete() {
@@ -349,7 +409,7 @@ $(document).ready(function() {
 		$.ajax(settings);
 	})
 
-	$("#updatePlantSection").hide();
+	$(".updatePlantSection").hide();
 	$("#addPlantSection").hide();
 	$(".plantListSection").show();
 
@@ -368,19 +428,42 @@ $(document).ready(function() {
 		updatePlantForm(id, plant);
 	})
 
-	$("body").on("submit", "#updatePlantSection", function(e) {
+// UPDATE HERE REMOVE PARENT()
+	$("body").on("click", ".updateJournal", function() {
+		console.log('you clicked update journal!')
+		let journalEntry = $(this).parent();
+		console.log(journalEntry);
+		let id = $(this).parent().attr("data-id");
+		console.log(id);
+		updateJournalForm(id, journalEntry);
+	})
+
+	$("body").on("submit", ".updatePlantSection", function(e) {
 		e.preventDefault();
 		let id = $(this).attr("data-id")
 		console.log(`you submitted updatePlantSection for ${id}`);
 		let updatedPlant = {
 			id: id,
-			name: $('#updatePlantName').val(),
-			startDate: $('#updateStartDate').val(),
-			harvestDate: $('#updateHarvestDate').val(),
-			comments: $('#updateComments').val(),
+			name: $('.updatePlantName').val(),
+			startDate: $('.updateStartDate').val(),
+			harvestDate: $('.updateHarvestDate').val(),
+			comments: $('.updateComments').val(),
 		}
 		updatePlant(id, updatedPlant);
 		console.log("plant updated")
+	})
+
+	$("body").on("submit", ".updateJournalSection", function(e) {
+		e.preventDefault();
+		let id = $(this).attr("data-id")
+		console.log(`you submitted updateJournalSection for ${id}`);
+		let updatedJournal = {
+			id: id,
+			content: $('.updateJournalEntry').val(),
+			publishDate: date.toDateString()
+		}
+		updateJournal(id, updatedJournal);
+		console.log("journal updated")
 	})
 
 	$("#cancel-add-plant").click(function() {
@@ -390,7 +473,7 @@ $(document).ready(function() {
 	})
 
 	$("#add-plant").click(function() {
-		$("#updatePlantSection").hide();
+		$(".updatePlantSection").hide();
 		$("#cancel-add-plant").show();
 		$("#plantListSection").show();
 		$("#addPlantSection").show();
@@ -419,6 +502,7 @@ $(document).ready(function() {
 		handlePlantAdd();
 		handleJournalAdd();
 		handlePlantUpdate();
+		handleJournalUpdate();
 		handlePlantDelete();
 	});
 })
