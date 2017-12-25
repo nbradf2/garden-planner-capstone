@@ -1,7 +1,7 @@
 
 /*Colors:
 Text/Dark:  #2C363F;
-Background/Light: #FBF7F5;
+Background/Light: #FBF7F5; F9F9F9
 Red: #890620;
 Yellow: #E8C547;
 Green: #0E8358;
@@ -33,7 +33,7 @@ html, body {
 }
 
 body {
-	background-color: #FBF7F5;
+	background-color: #F9F9F9;
 	color: #2C363F;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
@@ -114,7 +114,7 @@ footer {
 }
 
 .login-section {
-	color: #FBF7F5;
+	color: #F9F9F9;
 	background-image: url("../images/vegetable-basket1-min.jpg");
 	padding-top: 10rem;
 	padding-bottom: 10rem;
@@ -214,6 +214,14 @@ footer {
 	font-weight: 600;
 }
 
+.gardenDetails {
+	margin-top: 1rem;
+}
+
+.gardenDetails h2 {
+	display: inline-block;
+}
+
 .plantItem {
 	margin-top: 2rem;
 	font-size: 1.2rem;
@@ -243,13 +251,18 @@ footer {
 	margin-top: 1rem;
 }
 
-#addPlantSection {
+/*CHANGE?*/
+#addPlantSection,
+#addJournalSection {
 	margin-top: 1.5rem;
 	margin-left: 0;
 }
 
-#add-plant {
-	margin-top: 2rem;
+#add-plant,
+#add-journal-entry {
+	display: inline-block;
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 #updatePlantSection {
@@ -280,7 +293,12 @@ footer {
 	}
 }
 
+@media only screen and (max-width: 900px) {
+	/*update here for grid switch to smaller screens*/
+}
+
 @media only screen and (min-width: 1600px) {
+	/*CHANGE?*/
 	#addPlantSection {
 	margin-left: 8%;
 	}
