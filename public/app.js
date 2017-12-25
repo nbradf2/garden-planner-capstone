@@ -62,7 +62,7 @@ function showJournalResults(journalArray) {
 
 	$.each(journalArray, function(journalArrayKey, journalArrayValue) {
 		buildJournal += `<div class="journalItem" data-id=${journalArrayValue._id}>`
-		buildJournal += `<h3 class="journalDateAndTime">${journalArrayValue.publishDate}</h3>`
+		buildJournal += `<p class="journalDateAndTime">${journalArrayValue.publishDate}</p>`
 		buildJournal += `<p class="journalContent">${journalArrayValue.content}</p>`
 		buildJournal += `<button type="submit" class="updateJournal homePageButtons">Update</button>`
 		buildJournal += `<button type="submit" class="deleteJournal homePageButtons">Delete</button>`

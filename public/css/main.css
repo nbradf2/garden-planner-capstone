@@ -241,7 +241,8 @@ footer {
 	margin-bottom: 1 rem;
 }
 
-.plantName {
+.plantName,
+.journalDateAndTime {
 	height: 2.5rem;
 	vertical-align: middle;
 	font-size: 1.6rem;
@@ -251,12 +252,14 @@ footer {
 	cursor: pointer;
 }
 
-.plantInfo {
+.plantInfo,
+.journalContent {
 	padding-top: 1rem;
 	border-top: 1px solid #0E8358;
 }
 
-.plantInfo button {
+.plantInfo button,
+.journalItem button {
 	margin-top: 1rem;
 }
 
@@ -289,12 +292,14 @@ footer {
 	margin-bottom: 1rem;
 }
 
-.updatePlant {
+.updatePlant,
+.updateJournal {
 	margin-right: 1rem;
 	display: inline-block;
 }
 
-.deletePlant {
+.deletePlant,
+.deleteJournal {
 	display: inline-block;
 }
 
