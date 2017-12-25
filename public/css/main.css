@@ -41,6 +41,10 @@ body {
 	flex-direction: column;
 }
 
+/*h1 {
+	font-size: 4rem;
+}*/
+
 a {
 	text-decoration: none;
 	color: #890620;
@@ -71,10 +75,10 @@ button:hover {
 form {
 	margin: 0 auto;
 	text-align: left;
-	width: 60%;
+	/*width: 60%;*/
 }
 
-input {
+input, textarea {
 	height: 2.5rem;
 	border-radius: 5px;
 	padding-left: 1rem;
@@ -84,7 +88,8 @@ input {
 	margin-top: 1rem
 }
 
-input::placeholder {
+input::placeholder
+textarea::placeholder {
 	padding-left: 0.5rem;
 	color: #B2B5B9;
 }
@@ -170,6 +175,7 @@ footer {
 #login-page, #register-page {
 	margin-top: 2rem;
 	text-align: center;
+	width: 60%;
 }
 
 #login-page h2 {
@@ -214,18 +220,21 @@ footer {
 	font-weight: 600;
 }
 
+/***** GARDEN SECTION *****/
+
 .gardenDetails {
 	margin-top: 1rem;
 }
 
 .gardenDetails h2 {
 	display: inline-block;
+	font-size: 1.8rem;
 }
 
 .plantItem {
 	margin-top: 2rem;
 	font-size: 1.2rem;
-	width: 50%;
+	width: 100%;
 }
 
 .plantItem p {
@@ -251,7 +260,6 @@ footer {
 	margin-top: 1rem;
 }
 
-/*CHANGE?*/
 #addPlantSection,
 #addJournalSection {
 	margin-top: 1.5rem;
@@ -283,6 +291,23 @@ footer {
 
 .updatePlant {
 	margin-right: 1rem;
+	display: inline-block;
+}
+
+.deletePlant {
+	display: inline-block;
+}
+
+/***** JOURNAL SECTION *****/
+
+#newJournalEntry {
+	height: 
+}
+
+.journalSection {
+	display: block;
+	width: 100%;
+	padding-top: 1.8rem;
 }
 
 /***** MEDIA QUERIES *****/
@@ -298,8 +323,5 @@ footer {
 }
 
 @media only screen and (min-width: 1600px) {
-	/*CHANGE?*/
-	#addPlantSection {
-	margin-left: 8%;
-	}
+	
 }

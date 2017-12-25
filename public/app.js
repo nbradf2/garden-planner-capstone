@@ -261,6 +261,7 @@ function handlePlantAdd() {
 	    $("#addPlantSection input[type='text']").val('');
 	    $(".updatePlantSection").hide();
 		$("#addPlantSection").hide();
+		$("#cancel-add-plant").hide();
 		$(".plantListSection").show();
   });
 }
