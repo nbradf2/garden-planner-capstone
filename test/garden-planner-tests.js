@@ -34,12 +34,6 @@ function seedGardenData() {
 	return Garden.insertMany(seedData);
 }
 
-// used to generate a username to put in db
-// function generateTestUser() {
-// 	const testUser = Garden.createOne();
-// 	return User.create(testUser);
-// }
-
 // used to generate a plantName to put in db
 function generatePlantName() {
 	const plantNames = [
@@ -157,6 +151,5 @@ describe('Garden API resourse', function() {
 			done();
 		});
 	})
-
 })
 

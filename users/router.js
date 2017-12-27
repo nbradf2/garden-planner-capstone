@@ -1,16 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-
 const {User} = require('./models');
-
 const router = express.Router();
-
 const jsonParser = bodyParser.json();
 
-// POST to register a new user
 router.post('/', jsonParser, (req, res) => {
-	// Ensure that the username and password are defined
 	console.log('server-side username is: ', req.body.username);
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
@@ -23,7 +18,6 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 
-	// Check to make sure all of the fields are strings:
 	const stringFields = ['firstName', 'lastName', 'username', 'password', 'retypePass'];
 	const nonStringField = stringFields.find(
 		field => field in req.body && typeof req.body[field] !== 'string'
@@ -38,21 +32,6 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 	
-	// Check to make sure passwords match
-	// const nonMatchingPass = stringFields.find(
-	// 	field => field in req.body['password'] !== field in req.body['retypePass']
-	// );
-
-	// if (nonMatchingPass) {
-	// 	return res.status(422).json({
-	// 		code: 422,
-	// 		reason: 'ValidationError',
-	// 		message: 'Passwords do not match',
-	// 		location: nonMatchingPass
-	// 	});
-	// }
-
-	// reject values with aren't trimmed
 	const explicitlyTrimmedFields = ['username', 'password'];
 	const nonTrimmedField = explicitlyTrimmedFields.find(
 		field => req.body[field].trim() !== req.body[field]
@@ -67,7 +46,6 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 
-	// Check to make sure UN and pass are correct length
 	const sizedFields = {
 		username: {
 			min: 1
@@ -90,7 +68,6 @@ router.post('/', jsonParser, (req, res) => {
 
 	if (tooSmallField || tooLargeField) {
 		return res.status(422).json({
-			// if any of the checks fail, we return a JSON error object below:
 			code: 422,
 			reason: 'ValidationError',
 			message: tooSmallField
@@ -106,23 +83,9 @@ router.post('/', jsonParser, (req, res) => {
 	let firstName = '';
 	let lastName = '';
 
-	// check to see if pass and retype pass are same value
-	// if (password !== retypePass) {
-	// 	return res.status(422).json({
-	// 		code: 422,
-	// 		reason: 'ValidationError',
-	// 		message: 'Passwords do not match',
-	// 		location: retypePass
-	// 	});
-	// }
-
-	
-	// let {username, password, firstName = '', lastName = ''} = req.body;
-	// UN and pass come in pre-trimmed, otherwise throw error:
 	firstName = firstName.trim();
 	lastName = lastName.trim();
 
-	// because UNs are unique in our system, check to see if existing user with requested name:
 	return User.find({username})
 		.count()
 		.then(count => {
@@ -134,11 +97,9 @@ router.post('/', jsonParser, (req, res) => {
 					location: 'username'
 				});
 			}
-			// if no exisiting user, hash password:
 			return User.hashPassword(password);
 		})	
 
-		// Once we have our hash, save a new user, setting the PASSWORD to hash value
 		.then(hash => {
 			return User.create({
 				username,
@@ -158,10 +119,6 @@ router.post('/', jsonParser, (req, res) => {
 		});
 });
 
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
 router.get('/', (req, res) => {
     return User.find()
         .then(users => res.json(users.map(user => user.apiRepr())))

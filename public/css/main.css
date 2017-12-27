@@ -1,12 +1,3 @@
-
-/*Colors:
-Text/Dark:  #2C363F; 
-Background/Light:  F9F9F9
-Red: #890620;
-Yellow: #E8C547;
-Green: #0E8358;  65B094
-*/
-
 /***** CSS RESET *****/
 
 * {
@@ -41,10 +32,6 @@ body {
 	flex-direction: column;
 }
 
-/*h1 {
-	font-size: 4rem;
-}*/
-
 a {
 	text-decoration: none;
 	color: #890620;
@@ -62,6 +49,7 @@ button {
 	background-color: #E8C547;
 	height: 3rem;
 	width: 8rem;
+	margin-bottom: 1rem;
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	border-radius: 5px;
@@ -75,7 +63,6 @@ button:hover {
 form {
 	margin: 0 auto;
 	text-align: left;
-	/*width: 60%;*/
 }
 
 input, textarea {
@@ -94,8 +81,6 @@ textarea::placeholder {
 	padding-left: 0.5rem;
 	color: #B2B5B9;
 }
-
-/*CHANGE THIS STICKY FOOTER FLEXBOX*/
 
 footer {
 	margin-top: 1rem;
@@ -145,6 +130,15 @@ footer {
 	margin-top: 3rem;
 	margin-bottom: 1.5rem;
 }
+/*find*/
+.detail-section p {
+	margin: 1rem;
+}
+
+.demo {
+	color: #828487;
+	margin-bottom: 1rem;
+}
 
 .fa {
 	margin-bottom: 1rem;
@@ -165,7 +159,6 @@ footer {
 .fa-pencil {
 	color: #2C363F;
 }
-
 
 /***** LOG-IN/REGISTER PAGE *****/
 
@@ -225,7 +218,6 @@ footer {
 
 .gardenDetails {
 	margin-top: 1rem;
-	/*background-image: url("../images/grass-1.jpg");*/
 	height: 100%;
 }
 
@@ -298,8 +290,7 @@ footer {
 #cancel-journal-entry,
 #addJournalEntry,
 .updateJournal,
-.deleteJournal
- {
+.deleteJournal {
 	background-color: #65B094;
 }
 
@@ -314,7 +305,8 @@ footer {
 	font-size: 1rem;
 }
 
-#addPlantInfo {
+#addPlantInfo, 
+#addJournalEntry {
 	margin-right: 1rem;
 	margin-bottom: 1rem;
 }
@@ -323,7 +315,11 @@ footer {
 .updateJournal {
 	margin-right: 1rem;
 	display: inline-block;
-	margin-bottom: 1rem
+	margin-bottom: 1rem;
+}
+
+#updateJournalInfo {
+	margin-bottom: 1rem;
 }
 
 .deletePlant,
@@ -341,7 +337,6 @@ footer {
 .journalSection {
 	display: block;
 	width: 100%;
-/*	padding-top: 1.8rem;*/
 }
 
 /***** MEDIA QUERIES *****/
@@ -350,12 +345,4 @@ footer {
 	.plantItem {
 		width: 100%;
 	}
-}
-
-@media only screen and (max-width: 900px) {
-
-}
-
-@media only screen and (min-width: 1600px) {
-	
 }

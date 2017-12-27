@@ -1,28 +1,12 @@
-// blog-api-mongoose
-// where it says 'post', return 'plants'
-// app.get('/blog-posts', (req, res) => {})
-// 500s are internal/database errors
-// 400s are network errors
-
 const express = require('express');
-
 const config = require('../config');
-
 const router = express.Router();
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {Journal} = require('./models');
 
-// 1. what's the route? (Garden)
-// 2. Does request have a header auth prop set to bearer xxx - if not, will stop with 401 
-// 3. If has header auth prop, will respond with 200
-
-// will need to put this middleware line on ALL of the get/put/post/delete - all internal routes need authentication EXCEPT register/new-user
-// is global route - will get ALL Records
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
-	// make call to database first
-	// get response - if not response, send back 500.  if
 	Journal
 		.find()
 		.exec()
@@ -34,10 +18,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 		})
 });
 
-// to make get request to this, endpoint is garden/user/${currentUser}
 router.get('/user/:user', passport.authenticate('jwt', {session: false}), (req, res) => {
-	// make call to database first
-	// get response - if not response, send back 500.  if
 	Journal
 		.find({user: `${req.params.user}`})
 		.exec()
@@ -58,7 +39,6 @@ router.get('/:id', (req, res) => {
 			console.error(err);
 			res.status(500).json({message: 'Internal server error'})
 		})
-
 })
 
 router.post('/', jsonParser, (req, res) => {
@@ -79,7 +59,6 @@ router.post('/', jsonParser, (req, res) => {
 	res.status(201).json(item);
 });
 
-// START HERE
 router.put('/:id', jsonParser, (req, res) => {
 	const requiredFields = ['content'];
 	for (let i=0; i<requiredFields.length; i++) {
@@ -94,7 +73,6 @@ router.put('/:id', jsonParser, (req, res) => {
 		const message = `Request path id ${req.params.id} and request body id ${req.body.id} must match`;
 		console.error(message);
 		return res.status(400).send(message);
-		
 	}
 	console.log(`Updating journal item ${req.params.id}`);
 	Journal
@@ -116,15 +94,8 @@ router.delete('/:id', (req, res) => {
 		})
 });
 
-// catch-all for routes that are not named
 router.use('*', (req, res) => {
 	res.status(404).send('URL Not Found');
 });
 
-
-//************************************
-
 module.exports = {router};
-
-// should provide 'proof of work' when making changes so you can test them on the results
-// unit tests: delete by id, ifnd by id, should return error 

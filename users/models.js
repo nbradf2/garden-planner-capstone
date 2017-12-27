@@ -25,15 +25,10 @@ UserSchema.methods.apiRepr = function() {
 	};
 };
 
-// Validate password function:
-// 	- use BCRYPT to compare plain text value with the hashed value stored on this.password
 UserSchema.methods.validatePassword = function(password) {
 	return bcrypt.compare(password, this.password);
 };
 
-// Using the BCRYPTJS library to handle encrypting user passwords.
-// call the bcrypt HASH method with the raw password and an integer value
-// indicating how many rounds of the salting algorithm hsould be used.
 UserSchema.statics.hashPassword = function(password) {
 	return bcrypt.hash(password, 10);
 };

@@ -2,7 +2,6 @@ let GARDEN_URL = 'garden';
 let JOURNAL_URL = 'journal';
 let user = localStorage.getItem('currentUser');
 let date = new Date();
-// let currentDate = date.toLocaleDateString('en-US');
 
 function getGarden() {
 	console.log('Getting garden info')
@@ -32,6 +31,7 @@ function getJournal() {
 		},
 		contentType: 'application/json',
 		success: function(userData) {
+			console.log(userData);
 			showJournalResults(userData);
 		}
 	});
@@ -106,6 +106,7 @@ function addJournalEntry(journalPosts) {
 		},
 		data: JSON.stringify(journalPosts),
 		success: function(data) {
+			console.log(data);
 			getJournal(data);
 		},
 		error: function(err) {
@@ -130,7 +131,7 @@ function updatePlantForm(id, element) {
 
 			let updateTemplate = `
 				<form class="row updatePlantSection" data-id=${id}>
-					<h2>Update plant record</h2>
+					<h2>Update plant record</h2><br>
 					<label for="updatePlantName">Plant:</label>
 					<input type="text" name="updatePlantName" class="updatePlantName" value=${plantData.name}>
 					<label for="updateStartDate">Start Date:</label>
@@ -165,8 +166,7 @@ function updateJournalForm(id, element) {
 					<input type="text" name="updateJournalEntry" class="updateJournalEntry" placeholder="Write something!" required value=${journalData.content}>
 					<button type="submit" id="updateJournalInfo" class="homePageButtons">Update it!</button>
 				</form>`
-				// this is wrong
-			$(element).find(".journalItem").hide();
+			$(element).find(".journalInfo").hide();
 			$(element).after(updateJournalTemplate);
 		}
 	});
@@ -302,8 +302,8 @@ function handlePlantUpdate() {
 }
 
 function handleJournalUpdate() {
-	$("#updateJournalInfo").on('click', function(e) {
-		console.log('you updated your journal!');
+	$("#updateJournal").on('click', function(e) {
+		alert('you updated your journal!');
 		e.preventDefault();
 		updateJournal({
 			user: user,
@@ -388,10 +388,6 @@ $(document).ready(function() {
 			},
 			error: function(err) {
 				console.log(err);
-				// TO DO:
-				// if username not found
-				// if username and password don't match
-				// instead can write separate function 'handleError(err)'
 			}
 		};
 		$.ajax(settings);
@@ -407,7 +403,6 @@ $(document).ready(function() {
 		let settings = {
 			url:"/users/",
 			type: 'POST',
-			// application/json - make sure is forward slash
 			contentType: 'application/json',
 			data: JSON.stringify(user),
 			success: function(data) {
@@ -423,7 +418,6 @@ $(document).ready(function() {
 				if (password.length < 10) {
 					$("#errorTenChar").html("Password must be at least 10 characters")
 				}
-				//TO DO: not fully functional
 				if (password.length !== retypePass.length) {
 					$("#errorMatchPass").html("Passwords must match")
 				}
@@ -442,7 +436,6 @@ $(document).ready(function() {
 	$("body").on("click", ".plantName", function() {
 		console.log("you clicked the plant name");
 		event.preventDefault();
-		// $(this).slideToggle(300).siblings(".plantName");
 		$(this).parent().find(".plantInfo").slideToggle(300);
 	});
 
@@ -460,12 +453,11 @@ $(document).ready(function() {
 		updatePlantForm(id, plant);
 	})
 
-// UPDATE HERE REMOVE PARENT()
 	$("body").on("click", ".updateJournal", function() {
 		console.log('you clicked update journal!')
-		let journalEntry = $(this).parent();
+		let journalEntry = $(this).parent().parent();
 		console.log(journalEntry);
-		let id = $(this).parent().attr("data-id");
+		let id = $(this).parent().parent().attr("data-id");
 		console.log(id);
 		updateJournalForm(id, journalEntry);
 	})
@@ -511,7 +503,6 @@ $(document).ready(function() {
 		$("#addPlantSection").show();
 	})
 
-// DELETE if not working
 	$("#cancel-journal-entry").click(function() {
 		$("#addJournalSection input[type='text']").val('');
 		$("#addJournalSection").hide();
