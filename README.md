@@ -1,11 +1,18 @@
 <h1>GardenPlanner</h1>
 
 <p><a href="https://www.thinkful.com/">Thinkful</a> Node Capstone Project - Full stack capstone app integrating FEWD with <a href="https://nodejs.org/en/">Node.js</a> server-side development/CRUD operations</p>
-![landing page](public/images/landing-page.png)
-![login page](public/images/login.png)
-![register page](public/images/register.png)
-![add screen page](public/images/add-screen.png)
-![update page](public/images/update.png)
+
+![landing page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/landing-page.png)
+
+![login page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/login.png)
+
+![register page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/register.png)
+
+![home page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/home-screen.png)
+
+![add screen page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/add-screen.png)
+
+![update page](https://github.com/nbradf2/garden-planner-capstone/blob/master/public/images/update.png)
 
 <h2>Use Case</h2>
 <p>This app helps users plan and keep track of their garden.</p>
