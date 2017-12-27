@@ -36,7 +36,7 @@ function seedGardenData() {
 
 // used to generate a username to put in db
 // function generateTestUser() {
-// 	const testUser = app.createOne();
+// 	const testUser = Garden.createOne();
 // 	return User.create(testUser);
 // }
 
@@ -102,18 +102,31 @@ describe('Garden API resourse', function() {
 		return closeServer();
 	});
 
-	describe('/POST Login', () => {
-	it('should Login, and check token', (done) => {
-		chai.request(app)
-			.post('/auth/login')
-			.send(loginDetails)
-			.then((err, res) => {
-				res.should.have.status(200);
-				authToken = res.body.authToken;
-				console.log(res.body.authToken);
-				// login
-				chai.request(app)
-			})
+	describe('/POST Register', function() {
+		it('should Register, and check token', function(done) {
+			chai.request(app)
+				.post('/users/')
+				.send(loginDetails)
+				.then(function(err, res) {
+					res.should.have.status(201);
+					chai.request(app)
+				})
+			done();
+		})
+	})
+
+	describe('/POST Login', function() {
+		it('should Login, and check token', function(done) {
+			chai.request(app)
+				.post('/auth/login')
+				.send(loginDetails)
+				.then(function(err, res) {
+					res.should.have.status(200);
+					authToken = res.body.authToken;
+					console.log("authToken at login =" + authToken);
+					// login
+					chai.request(app)
+				})
 			done();
 		})
 	})
@@ -127,40 +140,22 @@ describe('Garden API resourse', function() {
 		});
 
 		it('GET/garden should return all existing plants', function(done) {
-			return new Promise((resolve, reject) => {
-				return chai.request(app)
-					.get('/garden')
-					.set('Authorization', `Bearer ${authToken}`)
-			
-
-			})
-
-
-
-
-
-			// let res;
-			// return chai.request(app)
-			// 	.get('/garden')
-			// 	.set('Authorization', `Bearer ${authToken}`)
-			// 	.then(function(_res) {
-			// 		res = _res;
-			// 		res.should.have.status(200);
-			// 		res.body.should.have.length.of.at.least(1);
-			// 		return Garden.count();
-			// 	})
-			// 	.then(function(count) {
-			// 		res.body.should.have.length.of(count);
-			// 	});
-			// 	done();
+			let res;
+			console.log("authToken=" + authToken);
+			chai.request(app)
+				.get('/garden')
+				.set('Authorization', `Bearer ${authToken}`)
+				.then(function(_res) {
+					res = _res;
+					res.should.have.status(200);
+					res.body.should.have.length.of.at.least(1);
+					return Garden.count();
+				})
+				.then(function(count) {
+					res.body.should.have.length.of(count);
+				});
+			done();
 		});
-
-
-
-
-
-
-
 	})
 
 })
