@@ -225,6 +225,8 @@ footer {
 
 .gardenDetails {
 	margin-top: 1rem;
+	/*background-image: url("../images/grass-1.jpg");*/
+	height: 100%;
 }
 
 .gardenDetails h2 {
@@ -251,14 +253,10 @@ footer {
 	background-color: ;
 }
 
-.plantItem {
-	margin-top: 2rem;
+.plantItem, {
+	margin-top: 1rem;
 	font-size: 1.2rem;
 	width: 100%;
-}
-
-.plantItem p {
-	margin-bottom: 1rem;
 }
 
 .plantName,
@@ -274,7 +272,7 @@ footer {
 }
 
 .plantInfo,
-.journalContent {
+.journalInfo {
 	padding-top: 1rem;
 	border-top: 1px solid #0E8358;
 }
@@ -343,7 +341,7 @@ footer {
 .journalSection {
 	display: block;
 	width: 100%;
-	padding-top: 1.8rem;
+/*	padding-top: 1.8rem;*/
 }
 
 /***** MEDIA QUERIES *****/
